@@ -277,6 +277,23 @@ h2 {
     }
 }
 
+/* Hide default cursor globally */
+html,
+body,
+a,
+button,
+[role="button"] {
+    cursor: none !important;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
 /* Service Grid */
 .service-grid {
     display: grid;
@@ -288,12 +305,16 @@ h2 {
     background: var(--glass-bg);
     border: 1px solid var(--border-color);
     padding: 3rem;
-    transition: transform 0.5s, border-color 0.5s;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s;
 }
 
-.service-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-color);
+@media (hover: hover) {
+    .service-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        border-color: var(--accent-color);
+        background: rgba(255, 255, 255, 0.05);
+        z-index: 10;
+    }
 }
 
 .service-num {
