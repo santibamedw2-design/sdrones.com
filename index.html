@@ -4,182 +4,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sdrones | Grabación, Fotografía, Edición y Streaming</title>
-    <meta name="description"
-        content="Somos Sdrones, expertos en grabación, fotografía aérea, edición profesional y streaming. Transformamos perspectivas en experiencias visuales de alto impacto.">
+    <title>SDRONES | Rebel Cats Gallery</title>
+    <!-- Favicon from SDRONES -->
+    <link rel="icon" type="image/png"
+        href="https://drive.google.com/thumbnail?id=1NIH7afNjYgywDOlcjMLyH-oQp7kJr0j4&sz=w64">
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://drive.google.com/thumbnail?id=1NIH7afNjYgywDOlcjMLyH-oQp7kJr0j4&sz=w64">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Inter:wght@300;400;600&display=swap"
         rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon"
-        href="https://drive.google.com/thumbnail?id=1skO2TMFep4BCmz-XJKhEAG5UlDvypjCC&sz=w64&v=2">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <div class="noise-overlay"></div>
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
+    <div class="noise-overlay"></div>
 
-    <nav id="main-nav">
-        <div class="nav-container">
-            <div class="logo">
-                <span class="logo-text">SDRONES</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#hero">Inicio</a></li>
-                <li><a href="#about">Quiénes Somos</a></li>
-                <li><a href="#services">Servicios</a></li>
-                <li><a href="#gallery">Portafolio</a></li>
-                <li><a href="#equipment">Equipo</a></li>
-                <li><a href="#footer">Contacto</a></li>
-            </ul>
-            <div class="nav-socials">
-                <a href="https://www.facebook.com/profile.php?id=61581254027429" target="_blank">FB</a>
-                <a href="https://www.instagram.com/s_drones.es" target="_blank">IG</a>
-                <a href="https://www.tiktok.com/@s_drones" target="_blank">TK</a>
-            </div>
+    <header>
+        <a href="https://santibamedw2-design.github.io/sdrones.com/" class="logo" target="_blank">
+            <span class="logo-text">SDRONES</span>
+        </a>
+        <div class="header-socials">
+            <a href="https://www.facebook.com/profile.php?id=61581254027429" target="_blank" title="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/s_drones.es" target="_blank" title="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            <a href="https://www.tiktok.com/@s_drones" target="_blank" title="TikTok">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.21 1.79v3.3a8.15 8.15 0 0 1-4.69-1.86c-.07 4.28.06 8.57-.05 12.85-.12 1.83-.87 3.63-2.26 4.88-1.57 1.4-3.78 2.08-5.88 1.9-2.09-.08-4.22-.88-5.74-2.34-1.82-1.63-2.61-4.2-2.15-6.62.36-2.11 1.6-4.14 3.47-5.26 1.13-.7 2.45-1.03 3.77-1.05V12.1c-.81.04-1.65.25-2.35.7-.91.56-1.53 1.55-1.68 2.61-.2 1.34.25 2.79 1.25 3.7 1.02 1 2.58 1.32 3.9 1.05 1.15-.2 2.22-.96 2.72-2.02.39-.77.53-1.66.5-2.52l-.08-15.6z">
+                    </path>
+                </svg>
+            </a>
+            <a href="https://wa.me/5578889720" target="_blank" title="WhatsApp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.38 8.38 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                    </path>
+                </svg>
+            </a>
         </div>
-    </nav>
+    </header>
 
     <main>
-        <section id="hero" class="v-h">
-            <div class="hero-content">
-                <h1 class="reveal-text">Somos <span class="accent">Sdrones</span></h1>
-                <p class="reveal-text delay-1">Elevando la cinematografía a un nivel superior.</p>
-                <div class="scroll-indicator reveal delay-2">
-                    <div class="mouse"></div>
-                    <span>Scroll</span>
-                </div>
-            </div>
-            <div class="hero-bg">
-                <div class="gradient-sphere"></div>
-            </div>
+        <section class="client-intro container reveal">
+            <span class="client-label">Cliente: Rebel Cats</span>
+            <h1 class="central-title">¡Rebel Cats! Primer Concierto</h1>
         </section>
 
-        <section id="about" class="container">
-            <div class="section-label reveal">(Quiénes somos)</div>
-            <h2 class="reveal">Pensamos más allá de los límites, creamos más allá de lo esperado.</h2>
-            <div class="grid-2">
-                <div class="text-block reveal">
-                    <p>En Sdrones, fusionamos la pasión por el vuelo con la excelencia audiovisual. Nacimos de la
-                        convicción de que cada ángulo cuenta una historia diferente. No solo capturamos imágenes;
-                        capturamos emociones desde perspectivas imposibles.</p>
+        <!-- Main Video Interaction Area -->
+        <section class="gallery-container container">
+            <!-- Active Player -->
+            <div class="player-wrapper reveal">
+                <div class="main-player-outer">
+                    <div class="main-player-inner">
+                        <iframe id="main-frame"
+                            src="https://drive.google.com/file/d/1sw8xe4EOMfEVJDobiMBGObtG69kEDp5T/preview"
+                            allow="autoplay; fullscreen" frameborder="0"></iframe>
+                    </div>
                 </div>
-                <div class="text-block reveal">
-                    <p>Nuestra misión es transformar ideas audaces en realidades visuales tangibles, utilizando
-                        tecnología de vanguardia y una visión artística única que redefine los estándares de la
-                        industria.</p>
+                <div class="player-controls">
+                    <div class="player-meta">
+                        <h2 id="active-title">¡Malas Compañías!</h2>
+                        <p id="active-desc">Rebel Cats Live @ Auditorio</p>
+                    </div>
+                    <a id="main-download"
+                        href="https://drive.google.com/uc?export=download&id=1sw8xe4EOMfEVJDobiMBGObtG69kEDp5T"
+                        class="btn-download" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Descargar Video
+                    </a>
                 </div>
             </div>
-        </section>
 
-        <section id="gallery" class="container dark">
-            <div class="section-label reveal">(Portafolio)</div>
-            <h2 class="reveal">Nuestras Producciones</h2>
-            <div class="video-grid">
-                <!-- Video 01 -->
-                <div class="video-card reveal">
-                    <div class="video-container">
-                        <iframe src="https://drive.google.com/file/d/1YfuJwhZGhmqMJuooFE8j3bSZDRkRzSm7/preview"
-                            allow="autoplay" allowfullscreen></iframe>
+            <!-- Video Grid (Vidflow Style) -->
+            <div class="video-grid reveal">
+                <h3 class="grid-heading">Colección de Medios</h3>
+                <div class="grid-items">
+                    <!-- Video 1 -->
+                    <div class="grid-item active" data-id="1sw8xe4EOMfEVJDobiMBGObtG69kEDp5T"
+                        data-title="¡Malas Compañías!" data-desc="Rebel Cats Live @ Auditorio">
+                        <div class="aspect-ratio-box">
+                            <img src="https://drive.google.com/thumbnail?id=1e9OoTXAvGBcGBMMXprJBwhUljv35u9xB&sz=w800"
+                                alt="Malas Compañías">
+                            <div class="item-overlay">
+                                <span class="play-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item-info">
+                            <h4>¡Malas Compañías!</h4>
+                        </div>
                     </div>
-                </div>
-                <!-- Video 02 -->
-                <div class="video-card reveal">
-                    <div class="video-container">
-                        <iframe src="https://drive.google.com/file/d/1-sanVeHfp78q8U392BmNP7DZPkqJW_eN/preview"
-                            allow="autoplay" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <!-- Video 03 -->
-                <div class="video-card reveal">
-                    <div class="video-container">
-                        <iframe src="https://drive.google.com/file/d/1hAqCQ0BTBSy8rIOuS3TOX3YcvbVCrhak/preview"
-                            allow="autoplay" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="services" class="container">
-            <div class="section-label reveal">(Qué hacemos)</div>
-            <div class="service-grid">
-                <div class="service-card reveal">
-                    <div class="service-num">01</div>
-                    <h3>Grabación Aérea</h3>
-                    <p>Cinematografía con drones de última generación para capturas de 4K y 5.3K con estabilidad
-                        cinematográfica.</p>
-                </div>
-                <div class="service-card reveal">
-                    <div class="service-num">02</div>
-                    <h3>Fotografía Profesional</h3>
-                    <p>Composiciones aéreas y terrestres que capturan la esencia de cada proyecto con detalle
-                        milimétrico.</p>
-                </div>
-                <div class="service-card reveal">
-                    <div class="service-num">03</div>
-                    <h3>Edición y Posproducción</h3>
-                    <p>Narrativas visuales fluidas, corrección de color avanzada y diseño sonoro envolvente.</p>
-                </div>
-                <div class="service-card reveal">
-                    <div class="service-num">04</div>
-                    <h3>Streaming en Vivo</h3>
-                    <p>Transmisiones en tiempo real con latencia mínima, ideales para eventos, deportes y producciones
-                        corporativas.</p>
-                </div>
-            </div>
-        </section>
+                    <!-- Video 2 -->
+                    <div class="grid-item" data-id="1trA_8q31zcLFz4GSwxOWUbEgonnIlx_D" data-title="¡Grupo Help!"
+                        data-desc="Rebel Cats Live @ Auditorio">
+                        <div class="aspect-ratio-box">
+                            <img src="https://drive.google.com/thumbnail?id=1GRxNxN1q6OY3jYdCw4EW7b641ohYutwO&sz=w800"
+                                alt="Grupo Help">
+                            <div class="item-overlay">
+                                <span class="play-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item-info">
+                            <h4>¡Grupo Help!</h4>
+                        </div>
+                    </div>
 
-        <section id="equipment" class="container dark">
-            <div class="section-label reveal">(Equipo Profesional)</div>
-            <h2 class="reveal">Tecnología de punta para resultados de élite.</h2>
-            <div class="equipment-showcase reveal text-only">
-                <div class="equipment-details">
-                    <p>Utilizamos las herramientas más actuales de la industria para garantizar una resolución desde
-                        1080p Full HD hasta 4K.</p>
-                    <ul class="equipment-list">
-                        <li><span>Drones:</span> DJI Mini 4 Pro, DJI Avata 2 (FPV)</li>
-                        <li><span>Cámaras Pro:</span> Sony, Nikon</li>
-                        <li><span>Cámaras de Acción:</span> DJI Osmo Action, GoPro</li>
-                        <li><span>Resolución:</span> 1080p Full HD / 4K</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+                    <!-- Video 3 -->
+                    <div class="grid-item" data-id="1ITsEuUvCfrh-mUbgyPEMfkBX76cYiIP8" data-title="¡Strange Days!"
+                        data-desc="Rebel Cats Live @ Auditorio">
+                        <div class="aspect-ratio-box">
+                            <img src="https://drive.google.com/thumbnail?id=1HvM1RWOJK3L2KJnz6Nr7Y89dTF4JYBxP&sz=w800"
+                                alt="Strange Days">
+                            <div class="item-overlay">
+                                <span class="play-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item-info">
+                            <h4>¡Strange Days!</h4>
+                        </div>
+                    </div>
 
-        <section id="footer" class="container">
-            <div class="footer-grid">
-                <div class="footer-info reveal">
-                    <h2>¿Listo para despegar?</h2>
-                    <p>Contáctanos para elevar tu próximo proyecto.</p>
-                    <div class="contact-btns">
-                        <a href="mailto:utricular3@hotmail.com" class="btn-primary">Email</a>
-                        <a href="https://wa.me/5578889720" target="_blank" class="btn-whatsapp">
-                            <span class="wa-icon"></span> WhatsApp
-                        </a>
+                    <!-- Video 4 -->
+                    <div class="grid-item" data-id="1g8xZ8crIPKXHqxFxe3mzXZo-OaaRwuJM"
+                        data-title="¡Malas Compañías! Con su Rola" data-desc="Rebel Cats Live @ Auditorio">
+                        <div class="aspect-ratio-box">
+                            <img src="https://drive.google.com/thumbnail?id=1e9OoTXAvGBcGBMMXprJBwhUljv35u9xB&sz=w800"
+                                alt="Malas Compañías Con su Rola">
+                            <div class="item-overlay">
+                                <span class="play-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item-info">
+                            <h4>¡Malas Compañías! Con su Rola</h4>
+                        </div>
+                    </div>
+
+                    <!-- Video 5 -->
+                    <div class="grid-item" data-id="1mF_oIIvIKMhlr1olQtELnADYVPxlv-AG" data-title="¡Rebel Cats!"
+                        data-desc="Rebel Cats Live @ Auditorio">
+                        <div class="aspect-ratio-box">
+                            <img src="https://drive.google.com/thumbnail?id=16jTQeFS7a9sO9Q0QI7LCRraoUJxensyH&sz=w800"
+                                alt="¡Rebel Cats!">
+                            <div class="item-overlay">
+                                <span class="play-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item-info">
+                            <h4>¡Rebel Cats!</h4>
+                        </div>
                     </div>
                 </div>
-                <div class="footer-links reveal">
-                    <div class="social-nav">
-                        <a href="https://www.facebook.com/profile.php?id=61581254027429" target="_blank">Facebook</a>
-                        <a href="https://www.instagram.com/s_drones.es" target="_blank">Instagram</a>
-                        <a href="https://www.tiktok.com/@s_drones" target="_blank">TikTok</a>
-                    </div>
-                    <div class="footer-image-container reveal">
-                        <img src="https://drive.google.com/uc?export=view&id=13GHRQl02fHDuihoE835q47KDXVjcmK5V"
-                            alt="Sdrones Team/Work" class="footer-image">
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Sdrones. Todos los derechos reservados.</p>
             </div>
         </section>
     </main>
 
-    <script src="main.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
