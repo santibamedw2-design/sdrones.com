@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Hover effect for service cards
-    document.querySelectorAll('.service-card').forEach(card => {
+    // Hover effect for service cards and video cards
+    document.querySelectorAll('.service-card, .video-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             follower.style.transform = 'scale(1.5)';
             follower.style.backgroundColor = 'rgba(0, 242, 255, 0.1)';
@@ -76,4 +76,35 @@ document.addEventListener('DOMContentLoaded', () => {
             follower.style.backgroundColor = 'transparent';
         });
     });
+
+    // Video Modal Logic
+    const videoCards = document.querySelectorAll('.video-card');
+    const modal = document.getElementById('video-modal');
+    
+    if (modal) {
+        const modalIframe = document.getElementById('modal-iframe');
+        const closeModal = document.querySelector('.close-modal');
+
+        videoCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const iframe = card.querySelector('iframe');
+                if(iframe) {
+                    modalIframe.src = iframe.src;
+                    modal.classList.add('active');
+                }
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            modalIframe.src = ''; 
+        });
+
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                modal.classList.remove('active');
+                modalIframe.src = ''; 
+            }
+        });
+    }
 });
