@@ -135,10 +135,13 @@ body {
     margin-left: 1.5rem;
     font-weight: 600;
     border: 1px solid var(--accent-color);
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    border-radius: 50%;
     transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
 }
 
 .nav-socials a:hover {
@@ -604,20 +607,51 @@ body {
 .footer-image-container {
     margin-top: 3rem;
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .footer-image {
-    width: 100%;
+    max-width: 250px;
     height: auto;
-    border-radius: 20px;
-    opacity: 0.8;
-    filter: grayscale(0.5);
-    transition: all 0.5s;
 }
 
-.footer-image:hover {
-    opacity: 1;
-    filter: grayscale(0);
+/* 3D Metallic Logo Effect */
+.main-logo-3d {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.2));
+    transform-style: preserve-3d;
+    cursor: none;
+}
+
+.main-logo-3d:hover {
+    transform: perspective(1000px) rotateX(15deg) rotateY(-15deg) scale(1.1) translateZ(10px);
+    filter: drop-shadow(0 15px 25px rgba(0, 242, 255, 0.6)) brightness(1.3) contrast(1.2);
+}
+
+.social-nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.social-nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-nav a:hover {
+    color: var(--bg-color);
+    background: var(--text-color);
+    transform: translateY(-5px);
+    border-color: var(--text-color);
 }
 
 .wa-icon {
