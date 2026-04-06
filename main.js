@@ -123,4 +123,92 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.remove('active');
         }));
     }
+
+    // Infinite Carousel Logic
+    const reviewsGrid = document.querySelector('.reviews-grid');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    if (reviewsGrid && prevBtn && nextBtn) {
+        
+        const getScrollStep = () => {
+            const card = reviewsGrid.querySelector('.review-card');
+            const gap = parseFloat(window.getComputedStyle(reviewsGrid).gap) || 32;
+            return card.offsetWidth + gap;
+        };
+
+        const originalCards = Array.from(reviewsGrid.children);
+        const originalCount = originalCards.length;
+
+        // Clone cards to create 5 exact identical sets (so scroll boundary is extremely far)
+        for (let i = 0; i < 4; i++) {
+            originalCards.forEach(card => {
+                reviewsGrid.appendChild(card.cloneNode(true));
+            });
+        }
+
+        setTimeout(() => {
+            const step = getScrollStep();
+            const originalWidth = step * originalCount;
+
+            // Initialize position strictly in the middle (Set 3 out of 5)
+            reviewsGrid.style.scrollBehavior = 'auto';
+            reviewsGrid.scrollLeft = originalWidth * 2;
+            void reviewsGrid.offsetWidth; // force css reflow
+            reviewsGrid.style.scrollBehavior = 'smooth';
+
+            // We only check borders safely after native scrolling finishes entirely (to avoid blocking touch scroll inertia)
+            reviewsGrid.addEventListener('scrollend', () => {
+                const current = reviewsGrid.scrollLeft;
+
+                // Si se meten al primer set (Llegando muy cerca a la izquierda absoluta)
+                if (current < originalWidth * 1) {
+                    reviewsGrid.style.scrollBehavior = 'auto';
+                    reviewsGrid.scrollLeft += (originalWidth * 2);
+                    void reviewsGrid.offsetWidth;
+                    reviewsGrid.style.scrollBehavior = 'smooth';
+                }
+                // Si se meten al quinto set (Llegando muy cerca a la derecha absoluta)
+                else if (current >= originalWidth * 4) {
+                    reviewsGrid.style.scrollBehavior = 'auto';
+                    reviewsGrid.scrollLeft -= (originalWidth * 2);
+                    void reviewsGrid.offsetWidth;
+                    reviewsGrid.style.scrollBehavior = 'smooth';
+                }
+            });
+
+            const scrollNext = () => {
+                reviewsGrid.scrollBy({ left: step, behavior: 'smooth' });
+            };
+
+            const scrollPrev = () => {
+                reviewsGrid.scrollBy({ left: -step, behavior: 'smooth' });
+            };
+
+            prevBtn.addEventListener('click', () => {
+                scrollPrev();
+                resetAutoScroll();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                scrollNext();
+                resetAutoScroll();
+            });
+
+            // Auto scroll configuration
+            let autoScrollInterval = setInterval(scrollNext, 3500);
+
+            const resetAutoScroll = () => {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = setInterval(scrollNext, 3500);
+            };
+
+            // Pause auto scroll on user interaction
+            reviewsGrid.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+            reviewsGrid.addEventListener('mouseleave', resetAutoScroll);
+            reviewsGrid.addEventListener('touchstart', () => clearInterval(autoScrollInterval), { passive: true });
+            reviewsGrid.addEventListener('touchend', resetAutoScroll, { passive: true });
+
+        }, 100);
+    }
 });

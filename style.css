@@ -76,8 +76,17 @@ body {
 
 .nav-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1002;
 }
 
 .logo-text {
@@ -129,6 +138,27 @@ body {
     align-items: center;
 }
 
+@media (min-width: 969px) {
+    .nav-menu {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo {
+        top: 0;
+    }
+    .nav-socials {
+        position: absolute;
+        top: 0.25rem;
+        left: 0;
+    }
+    .nav-links {
+        margin-top: 4rem;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 .nav-links {
     display: flex;
     list-style: none;
@@ -149,10 +179,15 @@ body {
     opacity: 1;
 }
 
+.nav-socials {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
 .nav-socials a {
     color: var(--accent-color);
     text-decoration: none;
-    margin-left: 1.5rem;
     font-weight: 600;
     border: 1px solid var(--accent-color);
     border-radius: 50%;
@@ -653,6 +688,7 @@ body {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
+    margin-top: 3rem;
 }
 
 .social-nav a {
@@ -699,6 +735,12 @@ body {
 
     .logo-text {
         font-size: 1.5rem;
+    }
+
+    .scroll-indicator {
+        position: static;
+        transform: none;
+        margin-top: 2rem;
     }
 
     .hamburger {
@@ -879,15 +921,62 @@ body {
     }
 }
 
-/* Reviews Section */
+/* Reviews Section Carousel */
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.carousel-header h2 {
+    margin-bottom: 0;
+}
+
+.carousel-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.carousel-btn {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
 .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
-    margin-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 2rem;
+    margin-top: 1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.reviews-grid::-webkit-scrollbar {
+    display: none;
 }
 
 .review-card {
+    flex: 0 0 350px;
+    scroll-snap-align: center;
     background: var(--glass-bg);
     border: 1px solid var(--border-color);
     padding: 3rem;
