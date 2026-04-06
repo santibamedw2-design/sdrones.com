@@ -140,6 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalCards = Array.from(reviewsGrid.children);
         const originalCount = originalCards.length;
 
+        // Remove 'reveal' class so cloning doesn't trap them in opacity 0
+        originalCards.forEach(card => card.classList.remove('reveal'));
+
         // Clone cards to create 5 exact identical sets (so scroll boundary is extremely far)
         for (let i = 0; i < 4; i++) {
             originalCards.forEach(card => {
