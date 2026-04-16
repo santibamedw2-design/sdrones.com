@@ -132,33 +132,42 @@ header {
 
 .header-socials {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.2rem;
     align-items: center;
 }
 
 .header-socials a {
-    color: #fff;
-    opacity: 0.6;
-    transition: var(--transition);
+    color: var(--accent-color);
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(0, 242, 255, 0.4);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
 .header-socials a:hover {
-    opacity: 1;
-    color: var(--accent-color);
-    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    background: rgba(0, 242, 255, 0.05);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+    transform: translateY(-3px) scale(1.05);
 }
 
 .header-socials svg {
-    filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0));
+    width: 20px;
+    height: 20px;
     transition: var(--transition);
+    filter: drop-shadow(0 0 5px rgba(0, 242, 255, 0.2));
 }
 
 .header-socials a:hover svg {
-    filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.5));
+    filter: drop-shadow(0 0 10px var(--accent-color));
 }
+
 
 .logo-text {
     font-family: var(--font-heading);
