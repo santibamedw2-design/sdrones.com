@@ -41,6 +41,13 @@ body {
     /* Space for the fixed header */
 }
 
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
 /* Custom Cursor Styles */
 .cursor {
     width: 6px;
@@ -65,6 +72,19 @@ body {
     z-index: 9998;
     transform: translate(-50%, -50%);
     transition: transform 0.1s ease-out, width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+}
+
+.cursor-glow {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 242, 255, 0.15) 0%, transparent 70%);
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    filter: blur(80px);
+    transition: transform 0.2s ease-out;
 }
 
 /* Cursor Hover State Removed as per user request to maintain constant shape */
@@ -439,7 +459,8 @@ body.hide-custom-cursor .cursor-follower {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 4rem 2rem;
+    overflow: visible;
 }
 
 .footer-logo-3d {
@@ -578,21 +599,35 @@ body.hide-custom-cursor .cursor-follower {
 
 
 @media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+
     header {
-        padding: 1rem;
+        padding: 1rem 5%;
     }
 
     .logo-text {
         font-size: 2rem;
+        letter-spacing: 0.2rem;
     }
 
     .hide-mobile {
         display: none !important;
     }
 
+    .central-title {
+        font-size: 2.5rem;
+    }
+
+    .gallery-container {
+        gap: 2rem;
+    }
+
     .player-controls {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
         gap: 1.5rem;
     }
 
@@ -602,8 +637,9 @@ body.hide-custom-cursor .cursor-follower {
     }
 
     .cursor,
-    .cursor-follower {
-        display: none;
+    .cursor-follower,
+    .cursor-glow {
+        display: none !important;
     }
 
     body {
@@ -613,7 +649,7 @@ body.hide-custom-cursor .cursor-follower {
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 4rem;
+        gap: 3rem;
     }
 
     .footer-socials {
@@ -621,11 +657,14 @@ body.hide-custom-cursor .cursor-follower {
     }
 
     .footer-logo-3d {
-        width: 160px;
+        width: 180px;
+        height: 180px;
     }
 
     .btn-email {
         width: 100%;
         justify-content: center;
+        padding: 1rem;
+        font-size: 0.9rem;
     }
 }

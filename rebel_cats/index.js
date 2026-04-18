@@ -2,17 +2,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Custom Cursor Logic
     const cursor = document.querySelector('.cursor');
     const follower = document.querySelector('.cursor-follower');
-    const mainFrameContainer = document.querySelector('.main-frame-container');
+    const glow = document.querySelector('.cursor-glow');
 
     document.addEventListener('mousemove', (e) => {
-        // Dot follows instantly
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
+        const { clientX: x, clientY: y } = e;
 
-        // Follower follows with slight delay/smoothing
+        // Dot follows instantly
+        cursor.style.left = x + 'px';
+        cursor.style.top = y + 'px';
+
+        // Follower and Glow follow with smooth movement
         requestAnimationFrame(() => {
-            follower.style.left = e.clientX + 'px';
-            follower.style.top = e.clientY + 'px';
+            follower.style.left = x + 'px';
+            follower.style.top = y + 'px';
+            
+            if (glow) {
+                glow.style.left = x + 'px';
+                glow.style.top = y + 'px';
+            }
         });
     });
 
