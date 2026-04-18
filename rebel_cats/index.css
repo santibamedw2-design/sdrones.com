@@ -18,8 +18,16 @@
     box-sizing: border-box;
 }
 
+* {
+    cursor: none !important;
+}
+
 html {
     scroll-behavior: smooth;
+}
+
+body, a, button, iframe, .grid-item, .btn-download, .btn-email, input, select, textarea {
+    cursor: none !important;
 }
 
 body {
@@ -31,7 +39,6 @@ body {
     padding-bottom: 5rem;
     padding-top: 150px;
     /* Space for the fixed header */
-    cursor: none;
 }
 
 /* Custom Cursor Styles */
@@ -60,21 +67,7 @@ body {
     transition: transform 0.1s ease-out, width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
 }
 
-/* Cursor Hover State */
-.cursor.hover {
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    box-shadow: 0 0 15px #fff, 0 0 30px #fff;
-}
-
-.cursor-follower.hover {
-    width: 60px;
-    height: 60px;
-    border-color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(2px);
-}
+/* Cursor Hover State Removed as per user request to maintain constant shape */
 
 /* Custom Selection */
 ::selection {
@@ -275,6 +268,13 @@ header {
     border: none;
 }
 
+/* Hide custom cursor over player area via JS-toggle class to allow native interaction */
+body.hide-custom-cursor .cursor,
+body.hide-custom-cursor .cursor-follower {
+    opacity: 0;
+    visibility: hidden;
+}
+
 .player-controls {
     display: flex;
     justify-content: space-between;
@@ -444,13 +444,44 @@ header {
 
 .footer-logo-3d {
     width: clamp(180px, 20vw, 280px);
-    height: auto;
-    filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.3));
+    height: clamp(180px, 20vw, 280px); /* Keep it square to match logo container proportions */
+    position: relative;
     transform-style: preserve-3d;
     animation: 
         logo-3d-float 6s ease-in-out infinite,
-        logo-3d-rotate 12s linear infinite,
-        logo-glow 4s ease-in-out infinite alternate;
+        logo-3d-rotate 12s linear infinite;
+    /* Glow pulse is better on faces or outer container to avoid transform issues */
+}
+
+.logo-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-face img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.4));
+    animation: logo-glow 4s ease-in-out infinite alternate;
+}
+
+.logo-front {
+    transform: rotateY(0deg) translateZ(2px);
+}
+
+.logo-back {
+    transform: rotateY(180deg) translateZ(2px);
+}
+
+.logo-back img {
+    /* No scale flip needed: rotation already aligns the faces naturally */
 }
 
 @keyframes logo-3d-float {

@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Custom Cursor Logic
     const cursor = document.querySelector('.cursor');
     const follower = document.querySelector('.cursor-follower');
+    const mainFrameContainer = document.querySelector('.main-frame-container');
 
     document.addEventListener('mousemove', (e) => {
         // Dot follows instantly
@@ -15,18 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Cursor Hover States
-    const interactives = document.querySelectorAll('a, button, .grid-item');
-    interactives.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.classList.add('hover');
-            follower.classList.add('hover');
+    // Hide custom cursor over video area to allow native interaction
+    const playerArea = document.querySelector('.main-player-outer');
+    if (playerArea) {
+        playerArea.addEventListener('mouseenter', () => {
+            document.body.classList.add('hide-custom-cursor');
         });
-        el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('hover');
-            follower.classList.remove('hover');
+        playerArea.addEventListener('mouseleave', () => {
+            document.body.classList.remove('hide-custom-cursor');
         });
-    });
+    }
 
     // Reveal Animations
     const reveals = document.querySelectorAll('.reveal');
@@ -63,8 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const parent = mainFrame.parentElement;
                 const timestamp = new Date().getTime();
 
-                // Aggressive reset: rewrite the parent innerHTML to force a clean player context
-                // This bypasses browser caching and security context sticking on GitHub Pages
+                // Rewrite parent innerHTML cleanly (overlay removed)
                 parent.innerHTML = `
                     <iframe id="main-frame" 
                         src="https://drive.google.com/file/d/${videoId}/preview?t=${timestamp}" 
@@ -74,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         style="opacity: 0; transition: opacity 0.3s ease;"></iframe>
                 `;
 
-                // Re-bind the global mainFrame reference to the newly created element
+                // Re-bind reference
                 mainFrame = document.getElementById('main-frame');
 
                 // Smooth fade-in
