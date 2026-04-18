@@ -87,9 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         videoCards.forEach(card => {
             card.addEventListener('click', () => {
-                const iframe = card.querySelector('iframe');
-                if(iframe) {
-                    modalIframe.src = iframe.src;
+                const videoUrl = card.getAttribute('data-video');
+                if (videoUrl) {
+                    modalIframe.src = videoUrl;
                     modal.classList.add('active');
                 }
             });
