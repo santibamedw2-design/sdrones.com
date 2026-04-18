@@ -36,7 +36,6 @@ body {
     font-family: var(--font-body);
     overflow-x: hidden;
     line-height: 1.6;
-    padding-bottom: 5rem;
     padding-top: 150px;
     /* Space for the fixed header */
 }
@@ -440,10 +439,9 @@ body.hide-custom-cursor .cursor-follower {
 
 /* Footer Styling */
 .site-footer {
-    padding: 5rem 5% 2rem;
+    padding: 8rem 5% 3rem;
     background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.05));
     border-top: 1px solid var(--border-color);
-    margin-top: 5rem;
 }
 
 .footer-content {
@@ -451,7 +449,16 @@ body.hide-custom-cursor .cursor-follower {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    justify-items: center;
     margin-bottom: 4rem;
+    width: 100%;
+}
+
+.footer-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .footer-logo-3d-wrapper {
@@ -584,7 +591,7 @@ body.hide-custom-cursor .cursor-follower {
     border-color: var(--accent-color);
     background: rgba(0, 242, 255, 0.1);
     box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
-    transform: translateX(10px);
+    transform: translateY(-5px);
 }
 
 .footer-bottom {
@@ -595,6 +602,9 @@ body.hide-custom-cursor .cursor-follower {
     opacity: 0.5;
     font-size: 0.85rem;
     letter-spacing: 0.05rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -656,13 +666,19 @@ body.hide-custom-cursor .cursor-follower {
         justify-content: center;
     }
 
+    .footer-email-wrap {
+        display: flex;
+        justify-content: center;
+    }
+
     .footer-logo-3d {
-        width: 180px;
-        height: 180px;
+        width: 160px;
+        height: 160px;
     }
 
     .btn-email {
         width: 100%;
+        max-width: 400px;
         justify-content: center;
         padding: 1rem;
         font-size: 0.9rem;
