@@ -182,11 +182,11 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2
 /* cursor personalizado */
 @media(pointer:fine){
   *,a,button,select,input,textarea,label,.btn,.gallery a{cursor:none!important}
-  .cursor{position:fixed;top:0;left:0;width:52px;height:68px;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;
+  .cursor{position:fixed;top:0;left:0;width:32px;height:38px;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;
     background:var(--accent);-webkit-mask:url(assets/img/float-s.png) center/contain no-repeat;mask:url(assets/img/float-s.png) center/contain no-repeat;
     filter:drop-shadow(0 0 6px var(--accent));transition:width .2s,height .2s,filter .2s;will-change:transform}
   .cursor-dot{display:none}
-  .cursor.grow{width:82px;height:106px}
+  .cursor.grow{width:62px;height:86px}
   .cursor.click{filter:drop-shadow(0 0 18px var(--accent)) brightness(1.5)}
 }
 .click-ring{position:fixed;border:2px solid var(--accent);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9998;animation:clickR .6s ease-out forwards;box-shadow:0 0 20px var(--accent-glow)}
