@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="facebook-domain-verification" content="o2vh6os9ermo1pd4zot5owxdj8fdc0" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SDRONES — Grabación profesional con dron para inmobiliarias y constructoras</title>
 <meta name="description" content="Video y fotografía aérea profesional con dron para inmobiliarias, constructoras y desarrolladores. Vende propiedades más rápido con producciones cinematográficas. Agenda tu llamada.">
@@ -49,7 +50,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.35s}
 header.scrolled{background:rgba(8,9,11,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;gap:24px;height:104px}
 .brand{display:flex;align-items:center;gap:12px;font-family:var(--disp);font-weight:700;font-size:1.25rem;letter-spacing:.04em}
-.brand-logo{height:66px;filter:brightness(0) invert(1);transition:.35s}
+.brand-logo{height:132px;filter:brightness(0) invert(1);transition:.35s}
 .brand:hover .brand-logo{filter:brightness(0) invert(1) drop-shadow(0 0 12px var(--accent))}
 .brand b{font-weight:800}.brand span{color:var(--accent)}
 .nav-links{display:flex;gap:26px;margin-left:auto}
@@ -564,17 +565,17 @@ mm.querySelectorAll('a').forEach(a=>a.onclick=()=>mm.classList.remove('open'));
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 // form -> whatsapp con las respuestas (el "bot" cero-código)
-const WA='5215578889720';
+const WA='5215578889720';   /* <-- WhatsApp del AGENTE de ManyChat. Cámbialo por el número que conectaste a ManyChat. */
 document.getElementById('leadForm').addEventListener('submit',e=>{
   e.preventDefault();
   const f=new FormData(e.target);
-  const msg=`¡Hola SDRONES! 👋 Quiero agendar una llamada.%0A%0A`+
-    `👤 Perfil: ${f.get('perfil')}%0A`+
-    `📍 Ciudad: ${f.get('ciudad')}%0A`+
-    `🏠 Inmueble: ${f.get('inmueble')}%0A`+
-    `📊 Publico al mes: ${f.get('volumen')}%0A`+
-    `📅 Lo necesito: ${f.get('cuando')}`;
-  window.open(`https://wa.me/${WA}?text=${msg}`,'_blank');
+  const msg='Hola SDRONES, quiero agendar una llamada.\n\n'+
+    'Perfil: '+f.get('perfil')+'\n'+
+    'Ciudad: '+f.get('ciudad')+'\n'+
+    'Inmueble: '+f.get('inmueble')+'\n'+
+    'Publico al mes: '+f.get('volumen')+'\n'+
+    'Lo necesito: '+f.get('cuando');
+  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');   // encodeURIComponent = sin signos rotos
 });
 document.getElementById('calBtn').onclick=(e)=>{e.preventDefault();Calendly.initPopupWidget({url:'https://calendly.com/santibamedw2/30min'});};
 // ===== cursor personalizado con brillo =====
