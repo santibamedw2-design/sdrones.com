@@ -593,9 +593,11 @@ if(fine){(function ring(){cxp+=(mx-cxp)*.2;cyp+=(my-cyp)*.2;cur.style.transform=
 // ===== logos S flotantes en colores =====
 const flC=document.getElementById('floaters'),cols=['cy','wh','sl'],FL=[];
 for(let i=0;i<8;i++){const d=document.createElement('div');d.className='floater '+cols[i%3];
-  const s=54+Math.random()*130;d.style.width=s+'px';d.style.height=(s*1.32)+'px';
-  FL.push({el:d,bx:Math.random()*innerWidth,by:Math.random()*innerHeight,sp:.12+Math.random()*.3,ph:Math.random()*6.3,amp:24+Math.random()*46,base:.05+Math.random()*.05});
+  const s=54+Math.random()*120;d.style.width=s+'px';d.style.height=(s*1.32)+'px';
+  FL.push({el:d,w:s,h:s*1.32,bx:0,by:0,sp:.1+Math.random()*.25,ph:Math.random()*6.3,amp:14+Math.random()*20,base:.05+Math.random()*.05});
   flC.appendChild(d);}
+function colocarFL(){for(const o of FL){o.bx=o.amp+Math.random()*Math.max(1,innerWidth-o.w-o.amp*2);o.by=o.amp+Math.random()*Math.max(1,innerHeight-o.h-o.amp*2);}}
+colocarFL();addEventListener('resize',colocarFL);
 // ===== partículas dinámicas con reacción al mouse =====
 const cv=document.getElementById('stars'),cx=cv.getContext('2d');let W,H,ps;
 function rz(){W=cv.width=innerWidth;H=cv.height=innerHeight;ps=Array.from({length:Math.min(95,innerWidth/15)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.7+.3}))}
@@ -607,11 +609,12 @@ let t=0;
     p.vx*=.95;p.vy*=.95;p.x+=p.vx+Math.sin(t+p.y*.01)*.18;p.y+=p.vy-.16;
     if(p.y<0)p.y=H;if(p.y>H)p.y=0;if(p.x<0)p.x=W;if(p.x>W)p.x=0;
     cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle='rgba(52,227,240,'+Math.min(.85,p.r/2)+')';cx.fill()}
-  for(const o of FL){const fx=o.bx+Math.sin(t*o.sp+o.ph)*o.amp;
-    let y=(((o.by-t*10*o.sp+Math.cos(t*o.sp*.8+o.ph)*o.amp)%(H+220))+H+220)%(H+220)-110;
-    const dist=Math.hypot(fx-mx,y-my),near=dist<190,sc=near?1+(190-dist)/190*.55:1;
-    o.el.style.transform=`translate(${fx}px,${y}px) scale(${sc}) rotate(${Math.sin(t*.3+o.ph)*7}deg)`;
-    o.el.style.opacity=near?Math.min(.3,o.base+(190-dist)/190*.24):o.base;
+  for(const o of FL){
+    let fx=o.bx+Math.sin(t*o.sp+o.ph)*o.amp, fy=o.by+Math.cos(t*o.sp*.8+o.ph)*o.amp;
+    fx=Math.max(4,Math.min(W-o.w-4,fx)); fy=Math.max(4,Math.min(H-o.h-4,fy));
+    const dist=Math.hypot(fx+o.w/2-mx,fy+o.h/2-my),near=dist<200,sc=near?1+(200-dist)/200*.3:1;
+    o.el.style.transform=`translate(${fx}px,${fy}px) scale(${sc}) rotate(${Math.sin(t*.3+o.ph)*6}deg)`;
+    o.el.style.opacity=near?Math.min(.3,o.base+(200-dist)/200*.24):o.base;
     o.el.style.filter=near?'drop-shadow(0 0 20px #34e3f0)':'none'}
   requestAnimationFrame(loop)})();
 </script>
