@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDRONES — Grabación profesional con dron para inmobiliarias y constructoras</title>
+<meta name="description" content="Video y fotografía aérea profesional con dron para inmobiliarias, constructoras y desarrolladores. Vende propiedades más rápido con producciones cinematográficas. Agenda tu llamada.">
+<meta property="og:title" content="SDRONES — Dron profesional para inmobiliarias">
+<meta property="og:description" content="Tus propiedades se ven como se merecen. Video aéreo cinematográfico que vende.">
+<meta property="og:image" content="assets/img/hero-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<style>
+:root{
+  --bg:#08090b; --bg2:#0e1013; --panel:#14171c; --panel2:#1b1f26;
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+  --white:#f3f6fa; --gray:#9aa3ad; --gray2:#6b7480;
+  --accent:#34e3f0; --accent2:#12b6c6; --accent-glow:rgba(52,227,240,.35);
+  --r:20px;
+  --font:'Outfit',system-ui,sans-serif; --disp:'Space Grotesk','Outfit',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--white);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+section{position:relative}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+h1,h2,h3{font-family:var(--disp);font-weight:700;line-height:1.08;letter-spacing:-.02em}
+.accent{color:var(--accent)}
+.muted{color:var(--gray)}
+
+/* fondo global con glow + grid */
+.bg-fx{position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(900px 600px at 80% -5%, rgba(52,227,240,.10), transparent 60%),
+  radial-gradient(700px 500px at 5% 20%, rgba(52,227,240,.06), transparent 55%),
+  linear-gradient(180deg,var(--bg),var(--bg2))}
+.bg-grid{position:fixed;inset:0;z-index:-1;opacity:.4;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;mask:radial-gradient(circle at 50% 30%,#000,transparent 75%)}
+canvas#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+
+/* ---------- header ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.35s}
+header.scrolled{background:rgba(8,9,11,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:24px;height:74px}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--disp);font-weight:700;font-size:1.25rem;letter-spacing:.04em}
+.brand-logo{height:34px;filter:brightness(0) invert(1);transition:.35s}
+.brand:hover .brand-logo{filter:brightness(0) invert(1) drop-shadow(0 0 12px var(--accent))}
+.brand b{font-weight:800}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:26px;margin-left:auto}
+.nav-links a{font-size:.94rem;color:var(--gray);font-weight:500;transition:.2s;position:relative}
+.nav-links a:hover{color:var(--white)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:.25s}
+.nav-links a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:100px;font-weight:600;font-size:.95rem;cursor:pointer;border:none;transition:.25s;font-family:var(--font)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04212a;box-shadow:0 6px 26px var(--accent-glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px var(--accent-glow)}
+.btn-ghost{background:rgba(255,255,255,.05);color:var(--white);border:1px solid var(--line2)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:var(--accent)}
+.btn-wa{background:#1faa53;color:#fff;box-shadow:0 6px 22px rgba(31,170,83,.35)}
+.btn-wa:hover{transform:translateY(-2px)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{width:26px;height:2.5px;background:var(--white);border-radius:2px;transition:.3s}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:100px 0 60px}
+.hero-video{position:absolute;inset:0;z-index:-1}
+.hero-video video{width:100%;height:100%;object-fit:cover}
+.hero-video::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(8,9,11,.72),rgba(8,9,11,.55) 40%,var(--bg) 96%),
+  linear-gradient(90deg,rgba(8,9,11,.85),transparent 70%)}
+.hero-inner{max-width:760px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border:1px solid var(--line2);border-radius:100px;
+  font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(52,227,240,.06);margin-bottom:26px;font-weight:600}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.hero h1{font-size:clamp(2.4rem,6vw,4.6rem);margin-bottom:22px}
+.hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 40px var(--accent-glow)}
+.hero p{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--gray);max-width:600px;margin-bottom:36px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
+.stat b{font-family:var(--disp);font-size:2.2rem;color:var(--white);display:block;line-height:1}
+.stat span{font-size:.85rem;color:var(--gray);text-transform:uppercase;letter-spacing:.08em}
+
+/* ---------- marquee ---------- */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;background:rgba(255,255,255,.015)}
+.marquee-track{display:flex;gap:60px;white-space:nowrap;animation:scroll 26s linear infinite;font-family:var(--disp);font-weight:600;color:var(--gray2);font-size:1.05rem}
+.marquee-track span{display:inline-flex;align-items:center;gap:60px}
+.marquee-track b{color:var(--accent)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ---------- secciones ---------- */
+.sec{padding:110px 0}
+.sec-head{text-align:center;max-width:680px;margin:0 auto 60px}
+.sec-head .eyebrow{margin-bottom:18px}
+.sec-head h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:16px}
+.sec-head p{color:var(--gray);font-size:1.1rem}
+
+/* servicios */
+.grid-serv{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:34px 30px;transition:.3s}
+.card:hover{border-color:var(--line2);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.card .ico{width:56px;height:56px;border-radius:15px;background:rgba(52,227,240,.1);border:1px solid rgba(52,227,240,.25);
+  display:grid;place-items:center;color:var(--accent);margin-bottom:22px;font-size:1.5rem}
+.card h3{font-size:1.3rem;margin-bottom:10px}
+.card p{color:var(--gray);font-size:.98rem}
+
+/* portafolio */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+.gallery a{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.gallery a img,.gallery a video{width:100%;height:100%;object-fit:cover;transition:.5s}
+.gallery a:hover img,.gallery a:hover video{transform:scale(1.08)}
+.gallery a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.6));opacity:0;transition:.3s}
+.gallery a:hover::after{opacity:1}
+.g-tall{grid-row:span 2}.g-wide{grid-column:span 2}
+.g-tag{position:absolute;left:14px;bottom:14px;z-index:2;font-size:.8rem;font-weight:600;opacity:0;transform:translateY(8px);transition:.3s;color:#fff}
+.gallery a:hover .g-tag{opacity:1;transform:none}
+
+/* proceso */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+.step{position:relative;padding:32px 26px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--disp);font-size:2.6rem;font-weight:700;color:var(--accent);opacity:.35;display:block;margin-bottom:12px}
+.step h3{font-size:1.15rem;margin-bottom:8px}.step p{color:var(--gray);font-size:.94rem}
+
+/* precios */
+.grid-price{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+.price{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:38px 32px;transition:.3s}
+.price:hover{transform:translateY(-6px);border-color:var(--line2)}
+.price.feat{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 24px 60px var(--accent-glow);position:relative}
+.price.feat .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04212a;font-size:.75rem;font-weight:700;padding:6px 16px;border-radius:100px;letter-spacing:.06em}
+.price h3{font-size:1.4rem;margin-bottom:6px}
+.price .desc{color:var(--gray);font-size:.9rem;margin-bottom:22px;min-height:40px}
+.price .amt{font-family:var(--disp);font-size:2.6rem;font-weight:700;margin-bottom:4px}
+.price .amt small{font-size:1rem;color:var(--gray);font-weight:500}
+.price .from{font-size:.82rem;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:24px}
+.price ul{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:12px}
+.price li{display:flex;gap:11px;font-size:.95rem;color:var(--white)}
+.price li svg{flex-shrink:0;color:var(--accent);margin-top:3px}
+.price .btn{width:100%;justify-content:center}
+
+/* formulario / agenda */
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:start}
+.form-box{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:40px}
+.form-box h2{font-size:1.9rem;margin-bottom:8px}.form-box>p{color:var(--gray);margin-bottom:26px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.88rem;font-weight:600;margin-bottom:8px;color:var(--white)}
+.field input,.field select{width:100%;padding:13px 15px;background:var(--bg);border:1px solid var(--line2);border-radius:12px;color:var(--white);font-family:var(--font);font-size:.96rem;transition:.2s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2334e3f0' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.aside-box{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:34px;position:sticky;top:100px}
+.aside-box h3{font-size:1.3rem;margin-bottom:18px}
+.chk{display:flex;gap:12px;margin-bottom:16px;color:var(--gray);font-size:.96rem}
+.chk svg{color:var(--accent);flex-shrink:0;margin-top:2px}
+.calendly{margin-top:24px;padding:22px;border:1px dashed var(--line2);border-radius:14px;text-align:center;color:var(--gray);font-size:.9rem}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2)}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+.foot-brand{max-width:320px}
+.foot-brand .brand{margin-bottom:16px}
+.foot-brand p{color:var(--gray);font-size:.95rem}
+.foot-col h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gray2);margin-bottom:16px}
+.foot-col a{display:block;color:var(--gray);margin-bottom:10px;font-size:.96rem;transition:.2s}
+.foot-col a:hover{color:var(--accent)}
+.foot-bottom{border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;color:var(--gray2);font-size:.86rem;flex-wrap:wrap;gap:10px}
+
+/* whatsapp flotante */
+.wa-float{position:fixed;bottom:26px;right:26px;z-index:60;width:62px;height:62px;border-radius:50%;background:#25d366;
+  display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.45);animation:pulse 2.6s infinite;transition:.3s}
+.wa-float:hover{transform:scale(1.08)}
+@keyframes pulse{0%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 10px 30px rgba(37,211,102,.45)}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* cursor personalizado */
+@media(pointer:fine){
+  body,a,button,select,input,.gallery a{cursor:none}
+  .cursor{position:fixed;top:0;left:0;width:34px;height:34px;border:1.5px solid var(--accent);border-radius:50%;
+    transform:translate(-50%,-50%);pointer-events:none;z-index:9999;transition:width .22s,height .22s,background .22s;will-change:transform}
+  .cursor-dot{position:fixed;top:0;left:0;width:6px;height:6px;background:var(--accent);border-radius:50%;
+    transform:translate(-50%,-50%);pointer-events:none;z-index:9999;box-shadow:0 0 14px var(--accent);will-change:transform}
+  .cursor.grow{width:62px;height:62px;background:rgba(52,227,240,.12)}
+  .cursor.click{width:16px;height:16px;background:var(--accent);border-color:transparent}
+}
+.click-ring{position:fixed;border:2px solid var(--accent);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9998;animation:clickR .6s ease-out forwards;box-shadow:0 0 20px var(--accent-glow)}
+@keyframes clickR{from{width:8px;height:8px;opacity:.9}to{width:100px;height:100px;opacity:0}}
+
+/* logos flotantes de fondo (la S en varios colores, tipo ecos) */
+.floaters{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.floater{position:absolute;opacity:.07;will-change:transform;transition:opacity .5s,filter .3s;
+  -webkit-mask:url(assets/img/logo-s.png) center/contain no-repeat;mask:url(assets/img/logo-s.png) center/contain no-repeat}
+.floater.cy{background:var(--accent)}.floater.wh{background:#fff}.floater.sl{background:#7f93ab}
+
+/* quiénes somos */
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.member{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.35s}
+.member:hover{transform:translateY(-7px);border-color:var(--accent);box-shadow:0 26px 54px rgba(0,0,0,.5)}
+.member-ph{aspect-ratio:4/5;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 25%,var(--panel2),var(--bg))}
+.member-ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.05);transition:.5s}
+.member:hover .member-ph img{filter:grayscale(0);transform:scale(1.06)}
+.member-ph.empty{display:grid;place-items:center}
+.member-ph.empty .ini{font-family:var(--disp);font-size:3.4rem;font-weight:700;color:var(--accent);opacity:.5}
+.member-ph.empty span.soon{position:absolute;bottom:14px;font-size:.72rem;color:var(--gray2);letter-spacing:.1em;text-transform:uppercase}
+.member-body{padding:22px}
+.member-body h3{font-size:1.12rem;margin-bottom:3px}
+.member-role{color:var(--accent);font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px}
+.member-body p{color:var(--gray);font-size:.88rem;line-height:1.5}
+
+/* sección logo grande metálico */
+.brandshow{padding:130px 0;text-align:center;position:relative;overflow:hidden}
+.brandshow .logo-big{position:relative;display:inline-block;width:min(660px,86vw);height:min(230px,30vw)}
+.brandshow .logo-big::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#e8eef5,#9fb0c4);
+  -webkit-mask:url(assets/img/logo-nombre.png) center/contain no-repeat;mask:url(assets/img/logo-nombre.png) center/contain no-repeat;filter:drop-shadow(0 0 34px rgba(52,227,240,.35))}
+.brandshow .logo-big::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.95) 48%,var(--accent) 52%,transparent 58%);
+  background-size:230% 100%;background-repeat:no-repeat;
+  -webkit-mask:url(assets/img/logo-nombre.png) center/contain no-repeat;mask:url(assets/img/logo-nombre.png) center/contain no-repeat;
+  mix-blend-mode:screen;animation:shine 4.8s ease-in-out infinite}
+@keyframes shine{0%{background-position:190% 0}100%{background-position:-90% 0}}
+.brandshow h2{font-size:clamp(1.6rem,3.6vw,2.7rem);margin-top:38px}
+.brandshow p{color:var(--gray);margin:12px auto 32px;max-width:540px;font-size:1.05rem}
+
+/* redes */
+.socials{display:flex;gap:12px}
+.socials a{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line2);color:var(--gray);transition:.25s}
+.socials a:hover{background:var(--accent);color:#04212a;border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 22px var(--accent-glow)}
+
+@media(max-width:900px){
+  .nav-links{display:none}.burger{display:flex}
+  .grid-serv,.steps,.grid-price{grid-template-columns:1fr}
+  .team{grid-template-columns:repeat(2,1fr)}
+  .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}
+  .split{grid-template-columns:1fr}.aside-box{position:static}
+  .g-wide{grid-column:span 2}
+  .hero-stats{gap:26px}
+  .mobile-menu.open{display:flex}
+}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:55;background:rgba(8,9,11,.97);backdrop-filter:blur(10px);
+  flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu a{font-family:var(--disp);font-size:1.6rem;color:var(--white)}
+.mobile-menu .close{position:absolute;top:24px;right:26px;font-size:2rem;background:none;border:none;color:#fff;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="bg-fx"></div>
+<div class="bg-grid"></div>
+<div class="floaters" id="floaters"></div>
+<canvas id="stars"></canvas>
+<div class="cursor" id="cur"></div>
+<div class="cursor-dot" id="curDot"></div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#" class="brand"><img src="assets/img/logo-nombre.png" alt="SDRONES" class="brand-logo"></a>
+    <nav class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#equipo">Nosotros</a>
+      <a href="#precios">Precios</a>
+      <a href="#agenda">Agendar</a>
+    </nav>
+    <a href="#agenda" class="btn btn-primary" style="margin-left:8px">Agenda tu llamada</a>
+    <button class="burger" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mmenu">
+  <button class="close" id="mclose">✕</button>
+  <a href="#servicios">Servicios</a><a href="#portafolio">Portafolio</a>
+  <a href="#precios">Precios</a><a href="#proceso">Proceso</a>
+  <a href="#agenda" class="accent">Agenda tu llamada</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-video">
+    <video src="assets/video/hero.mp4" poster="assets/img/hero-poster.jpg" autoplay muted loop playsinline></video>
+  </div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span class="dot"></span>Dron profesional · Inmobiliarias y constructoras</span>
+    <h1>Tus propiedades se ven como <em>se merecen.</em></h1>
+    <p>Producciones aéreas cinematográficas que hacen que una propiedad se venda más rápido y se perciba de mayor valor. Video y foto con dron para inmobiliarias, desarrolladores y constructoras.</p>
+    <div class="hero-cta">
+      <a href="#agenda" class="btn btn-primary">Agenda una llamada de 15 min →</a>
+      <a href="#portafolio" class="btn btn-ghost">▶ Ver portafolio</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>+150</b><span>Propiedades grabadas</span></div>
+      <div class="stat"><b>4K</b><span>Calidad cine</span></div>
+      <div class="stat"><b>48h</b><span>Entrega express</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee"><div class="marquee-track">
+  <span>Video aéreo 4K <b>•</b> Recorridos inmobiliarios <b>•</b> Avance de obra <b>•</b> Fotografía aérea <b>•</b> Tours virtuales <b>•</b> Redes sociales <b>•</b> </span>
+  <span>Video aéreo 4K <b>•</b> Recorridos inmobiliarios <b>•</b> Avance de obra <b>•</b> Fotografía aérea <b>•</b> Tours virtuales <b>•</b> Redes sociales <b>•</b> </span>
+</div></div>
+
+<!-- SERVICIOS -->
+<section class="sec" id="servicios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Qué hacemos</span>
+      <h2>Producción aérea que <span class="accent">vende</span></h2>
+      <p>Todo lo que necesitas para que tu propiedad destaque entre miles de anuncios iguales.</p>
+    </div>
+    <div class="grid-serv">
+      <div class="card reveal"><div class="ico">🏠</div><h3>Video inmobiliario</h3><p>Recorridos cinematográficos aéreos y a nivel que muestran la propiedad y su entorno en su mejor ángulo.</p></div>
+      <div class="card reveal"><div class="ico">🏗️</div><h3>Avance de obra</h3><p>Reportes visuales mensuales del progreso de construcción para desarrolladores e inversionistas.</p></div>
+      <div class="card reveal"><div class="ico">📸</div><h3>Fotografía aérea</h3><p>Fotos en alta resolución para portales, brochures y redes que capturan magnitud y ubicación.</p></div>
+      <div class="card reveal"><div class="ico">🎬</div><h3>Reels para redes</h3><p>Clips verticales optimizados para Instagram, TikTok y Facebook que multiplican tus vistas.</p></div>
+      <div class="card reveal"><div class="ico">🗺️</div><h3>Tomas de ubicación</h3><p>Contexto aéreo: cercanía a avenidas, plazas y servicios que suben el valor percibido.</p></div>
+      <div class="card reveal"><div class="ico">✨</div><h3>Edición premium</h3><p>Color, música y ritmo de nivel cine. Entregamos listo para publicar en 48 horas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section class="sec" id="portafolio" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Portafolio</span>
+      <h2>Trabajos <span class="accent">recientes</span></h2>
+      <p>Una muestra de propiedades y proyectos que hemos hecho volar.</p>
+    </div>
+    <div class="gallery reveal">
+      <a class="g-wide g-tall" href="assets/video/portafolio.mp4" target="_blank"><video src="assets/video/portafolio.mp4" muted loop autoplay playsinline></video><span class="g-tag">Desarrollo · Gap Metropolitana</span></a>
+      <a href="assets/img/p1.jpg" target="_blank"><img src="assets/img/p1.jpg" alt=""><span class="g-tag">Residencial</span></a>
+      <a href="assets/img/p2.jpg" target="_blank"><img src="assets/img/p2.jpg" alt=""><span class="g-tag">Casa con jardín</span></a>
+      <a href="assets/img/p4.jpg" target="_blank"><img src="assets/img/p4.jpg" alt=""><span class="g-tag">Vista aérea</span></a>
+      <a href="assets/img/p5.jpg" target="_blank"><img src="assets/img/p5.jpg" alt=""><span class="g-tag">Propiedad</span></a>
+      <a class="g-wide" href="assets/img/p3.jpg" target="_blank"><img src="assets/img/p3.jpg" alt=""><span class="g-tag">Fraccionamiento</span></a>
+      <a href="assets/img/p6.jpg" target="_blank"><img src="assets/img/p6.jpg" alt=""><span class="g-tag">Exterior</span></a>
+      <a href="assets/img/p7.jpg" target="_blank"><img src="assets/img/p7.jpg" alt=""><span class="g-tag">Terreno</span></a>
+      <a href="assets/img/p8.jpg" target="_blank"><img src="assets/img/p8.jpg" alt=""><span class="g-tag">Obra</span></a>
+      <a href="assets/img/p9.jpg" target="_blank"><img src="assets/img/p9.jpg" alt=""><span class="g-tag">Panorámica</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section class="sec" id="equipo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Quiénes somos</span>
+      <h2>El equipo detrás de <span class="accent">cada toma</span></h2>
+      <p>Un equipo joven, técnico y creativo obsesionado con que tus propiedades se vean espectaculares.</p>
+    </div>
+    <div class="team">
+      <div class="member reveal">
+        <div class="member-ph"><img src="assets/img/team-santiago.jpg" alt="Santiago Barrios Medina"></div>
+        <div class="member-body"><h3>Santiago Barrios Medina</h3><div class="member-role">Director y Productor</div>
+          <p>Ingeniero en software y piloto de drones. Dirige la producción y la estrategia de cada proyecto.</p></div>
+      </div>
+      <div class="member reveal">
+        <div class="member-ph"><img src="assets/img/team-sara.jpg" alt="Sara Chavira"></div>
+        <div class="member-body"><h3>Sara Chavira</h3><div class="member-role">Directora Creativa</div>
+          <p>Fotógrafa profesional y creadora de contenido. Define el estilo visual y la narrativa de cada entrega.</p></div>
+      </div>
+      <div class="member reveal">
+        <div class="member-ph empty"><span class="ini">FB</span><span class="soon">SDrones</span></div>
+        <div class="member-body"><h3>Felipe Barrios Treviño</h3><div class="member-role">2ª Cámara · Calidad</div>
+          <p>Segunda cámara y supervisor de calidad. Se asegura de que cada toma cumpla el estándar SDrones.</p></div>
+      </div>
+      <div class="member reveal">
+        <div class="member-ph empty"><span class="ini">AM</span><span class="soon">Foto pronto</span></div>
+        <div class="member-body"><h3>Alberto Mendoza</h3><div class="member-role">Editor · Community · 3ª Cámara</div>
+          <p>Editor profesional y community manager. Convierte el material en piezas listas para vender y para redes.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="sec" id="proceso" style="background:linear-gradient(180deg,transparent,rgba(52,227,240,.03),transparent)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Cómo trabajamos</span>
+      <h2>Simple, rápido y <span class="accent">sin rodeos</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Agenda</h3><p>Reservas una llamada de 15 min directo en el calendario. Sin esperas.</p></div>
+      <div class="step reveal"><h3>Cotización</h3><p>Vemos tu propiedad y te damos paquete y precio claros al momento.</p></div>
+      <div class="step reveal"><h3>Grabación</h3><p>Vamos a la propiedad con equipo profesional y capturamos todo.</p></div>
+      <div class="step reveal"><h3>Entrega</h3><p>Recibes tu video y fotos editados, listos para publicar, en 48h.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="sec" id="precios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Inversión</span>
+      <h2>Paquetes <span class="accent">transparentes</span></h2>
+      <p>Precios claros desde el inicio. Sin sorpresas, sin regateo.</p>
+    </div>
+    <div class="grid-price">
+      <div class="price reveal">
+        <h3>Esencial</h3>
+        <p class="desc">Ideal para asesores independientes y una propiedad.</p>
+        <div class="amt">$3,500 <small>MXN</small></div>
+        <div class="from">Desde</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Video aéreo editado 30-45 seg</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>10 fotos aéreas en alta</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>1 versión vertical para reels</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Entrega en 48h</li>
+        </ul>
+        <a href="#agenda" class="btn btn-ghost">Agendar</a>
+      </div>
+      <div class="price feat reveal">
+        <span class="tag">MÁS ELEGIDO</span>
+        <h3>Profesional</h3>
+        <p class="desc">La opción favorita de inmobiliarias que quieren vender rápido.</p>
+        <div class="amt">$6,500 <small>MXN</small></div>
+        <div class="from">Desde</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Video cinematográfico 60-90 seg</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Aéreo + interiores + exteriores</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>20 fotos profesionales</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>2 reels verticales + música licenciada</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Entrega prioritaria 48h</li>
+        </ul>
+        <a href="#agenda" class="btn btn-primary">Agendar ahora</a>
+      </div>
+      <div class="price reveal">
+        <h3>Premium</h3>
+        <p class="desc">Para desarrollos, constructoras y proyectos grandes.</p>
+        <div class="amt">$12,000 <small>MXN</small></div>
+        <div class="from">Desde</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Producción completa multi-locación</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Video maestro + tomas de ubicación</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Avance de obra mensual (opcional)</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Pack redes: 4+ reels editados</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Fotos ilimitadas del proyecto</li>
+        </ul>
+        <a href="#agenda" class="btn btn-ghost">Agendar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO / AGENDA -->
+<section class="sec" id="agenda">
+  <div class="wrap">
+    <div class="split">
+      <div class="form-box reveal">
+        <span class="eyebrow"><span class="dot"></span>Agenda tu llamada</span>
+        <h2 style="margin-top:14px">Cuéntanos de tu proyecto</h2>
+        <p>Responde estas preguntas rápidas y te contactamos por WhatsApp para agendar tu llamada de 15 min. Solo trabajamos con quien va en serio.</p>
+        <form id="leadForm">
+          <div class="field"><label>¿Eres asesor independiente o inmobiliaria?</label>
+            <select name="perfil" required><option value="" disabled selected>Selecciona…</option><option>Asesor independiente</option><option>Inmobiliaria / Agencia</option><option>Constructora / Desarrollador</option><option>Dueño particular</option></select></div>
+          <div class="field"><label>¿En qué ciudad trabajas?</label>
+            <input name="ciudad" placeholder="Ej. Ciudad de México" required></div>
+          <div class="field"><label>¿Qué tipo de inmueble quieres grabar?</label>
+            <select name="inmueble" required><option value="" disabled selected>Selecciona…</option><option>Casa</option><option>Departamento</option><option>Terreno</option><option>Desarrollo / Fraccionamiento</option><option>Comercial / Industrial</option></select></div>
+          <div class="field"><label>¿Cuántas propiedades publicas al mes?</label>
+            <select name="volumen" required><option value="" disabled selected>Selecciona…</option><option>1 - 3</option><option>4 - 10</option><option>Más de 10</option></select></div>
+          <div class="field"><label>¿Cuándo necesitas el servicio?</label>
+            <select name="cuando" required><option value="" disabled selected>Selecciona…</option><option>Esta semana</option><option>Este mes</option><option>Solo estoy cotizando</option></select></div>
+          <button type="submit" class="btn btn-wa" style="width:100%;justify-content:center;margin-top:6px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.6.2-.2.3-.7 1-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.7-3.3-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.8.8-1 1.9-.6 3.2.5 1.6 1.6 3 3.1 4.1 2.1 1.6 3.7 1.9 4.5 1.7.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.2-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            Enviar y agendar por WhatsApp
+          </button>
+        </form>
+      </div>
+      <div class="aside-box reveal">
+        <h3>Con esto, tu llamada es con alguien que:</h3>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Ya conoce nuestros precios</div>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Sabe exactamente qué hacemos</div>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Ya decidió que le interesa</div>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Está listo para avanzar</div>
+        <div class="calendly">
+          📅 <b style="color:var(--white)">¿Prefieres reservar directo?</b><br>
+          Aquí irá tu calendario de <b style="color:var(--accent)">Calendly / Zoho Bookings</b> para que agenden solos.
+          <br><br><a href="#" class="btn btn-ghost" style="margin-top:6px" id="calBtn">Elegir horario</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO GRANDE METÁLICO -->
+<section class="brandshow">
+  <div class="wrap">
+    <div class="logo-big reveal"></div>
+    <h2 class="reveal">¿Listo para hacer <span class="accent">volar</span> tu propiedad?</h2>
+    <p class="reveal">Agenda una llamada de 15 minutos y te mostramos cómo se vería tu inmueble con SDrones.</p>
+    <a href="#agenda" class="btn btn-primary reveal">Agenda tu llamada →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <a href="#" class="brand"><img src="assets/img/logo-nombre.png" alt="SDRONES" class="brand-logo"></a>
+        <p>Grabación profesional con dron para inmobiliarias, constructoras y desarrolladores. Hacemos que tus propiedades se vendan más rápido.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Servicios</h4>
+        <a href="#servicios">Video inmobiliario</a><a href="#servicios">Avance de obra</a>
+        <a href="#servicios">Fotografía aérea</a><a href="#servicios">Reels para redes</a>
+      </div>
+      <div class="foot-col">
+        <h4>Empresa</h4>
+        <a href="#portafolio">Portafolio</a><a href="#precios">Precios</a><a href="#agenda">Agendar</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <a href="https://wa.me/5215578889720" target="_blank">WhatsApp 55 7888 9720</a>
+        <a href="mailto:contacto@sdronesmx.com">contacto@sdronesmx.com</a>
+        <div class="socials" style="margin-top:16px">
+          <a href="https://www.facebook.com/profile.php?id=61581254027429" target="_blank" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg></a>
+          <a href="https://www.instagram.com/s_drones.es/" target="_blank" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.tiktok.com/@s_drones" target="_blank" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2 1.6 3.6 3.6 3.9v2.8c-1.3.1-2.5-.3-3.6-1v5.9c0 3.3-2.4 5.4-5.3 5.4-3 0-5.2-2.4-5.2-5.3 0-3 2.5-5.3 5.7-5v2.9c-.4-.1-.8-.2-1.2-.2-1.4 0-2.4 1-2.4 2.4 0 1.4 1 2.4 2.4 2.4 1.4 0 2.5-1 2.5-2.7V3H16z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SDRONES · Todos los derechos reservados.</span>
+      <span>Grabación aérea profesional · México</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5215578889720" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.6.2-.2.3-.7 1-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.7-3.3-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.8.8-1 1.9-.6 3.2.5 1.6 1.6 3 3.1 4.1 2.1 1.6 3.7 1.9 4.5 1.7.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.2-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+<script>
+// header scroll
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>30));
+// menu movil
+const mm=document.getElementById('mmenu');
+document.getElementById('burger').onclick=()=>mm.classList.add('open');
+document.getElementById('mclose').onclick=()=>mm.classList.remove('open');
+mm.querySelectorAll('a').forEach(a=>a.onclick=()=>mm.classList.remove('open'));
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// form -> whatsapp con las respuestas (el "bot" cero-código)
+const WA='5215578889720';
+document.getElementById('leadForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=new FormData(e.target);
+  const msg=`¡Hola SDRONES! 👋 Quiero agendar una llamada.%0A%0A`+
+    `👤 Perfil: ${f.get('perfil')}%0A`+
+    `📍 Ciudad: ${f.get('ciudad')}%0A`+
+    `🏠 Inmueble: ${f.get('inmueble')}%0A`+
+    `📊 Publico al mes: ${f.get('volumen')}%0A`+
+    `📅 Lo necesito: ${f.get('cuando')}`;
+  window.open(`https://wa.me/${WA}?text=${msg}`,'_blank');
+});
+document.getElementById('calBtn').onclick=(e)=>{e.preventDefault();alert('Aquí conectamos tu Calendly o Zoho Bookings. Dime tu enlace y lo embebo.');};
+// ===== cursor personalizado con brillo =====
+const cur=document.getElementById('cur'),curDot=document.getElementById('curDot');
+let mx=innerWidth/2,my=innerHeight/2,cxp=mx,cyp=my;
+const fine=matchMedia('(pointer:fine)').matches;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;if(fine)curDot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`});
+if(fine){(function ring(){cxp+=(mx-cxp)*.2;cyp+=(my-cyp)*.2;cur.style.transform=`translate(${cxp}px,${cyp}px) translate(-50%,-50%)`;requestAnimationFrame(ring)})();
+  document.querySelectorAll('a,button,select,input,.gallery a,.card,.member,.price,.step').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('grow'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('grow'));});
+  addEventListener('mousedown',e=>{cur.classList.add('click');const r=document.createElement('div');r.className='click-ring';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';document.body.appendChild(r);setTimeout(()=>r.remove(),620)});
+  addEventListener('mouseup',()=>cur.classList.remove('click'));
+}
+// ===== logos S flotantes en colores =====
+const flC=document.getElementById('floaters'),cols=['cy','wh','sl'],FL=[];
+for(let i=0;i<8;i++){const d=document.createElement('div');d.className='floater '+cols[i%3];
+  const s=54+Math.random()*130;d.style.width=s+'px';d.style.height=(s*1.32)+'px';
+  FL.push({el:d,bx:Math.random()*innerWidth,by:Math.random()*innerHeight,sp:.12+Math.random()*.3,ph:Math.random()*6.3,amp:24+Math.random()*46,base:.05+Math.random()*.05});
+  flC.appendChild(d);}
+// ===== partículas dinámicas con reacción al mouse =====
+const cv=document.getElementById('stars'),cx=cv.getContext('2d');let W,H,ps;
+function rz(){W=cv.width=innerWidth;H=cv.height=innerHeight;ps=Array.from({length:Math.min(95,innerWidth/15)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.7+.3}))}
+rz();addEventListener('resize',rz);
+let t=0;
+(function loop(){t+=.016;cx.clearRect(0,0,W,H);
+  for(const p of ps){const dx=p.x-mx,dy=p.y-my,d2=dx*dx+dy*dy;
+    if(d2<20000){const inv=1/Math.sqrt(d2+1),f=(20000-d2)/20000*.7;p.vx+=dx*inv*f;p.vy+=dy*inv*f}
+    p.vx*=.95;p.vy*=.95;p.x+=p.vx+Math.sin(t+p.y*.01)*.18;p.y+=p.vy-.16;
+    if(p.y<0)p.y=H;if(p.y>H)p.y=0;if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+    cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle='rgba(52,227,240,'+Math.min(.85,p.r/2)+')';cx.fill()}
+  for(const o of FL){const fx=o.bx+Math.sin(t*o.sp+o.ph)*o.amp;
+    let y=(((o.by-t*10*o.sp+Math.cos(t*o.sp*.8+o.ph)*o.amp)%(H+220))+H+220)%(H+220)-110;
+    const dist=Math.hypot(fx-mx,y-my),near=dist<190,sc=near?1+(190-dist)/190*.55:1;
+    o.el.style.transform=`translate(${fx}px,${y}px) scale(${sc}) rotate(${Math.sin(t*.3+o.ph)*7}deg)`;
+    o.el.style.opacity=near?Math.min(.3,o.base+(190-dist)/190*.24):o.base;
+    o.el.style.filter=near?'drop-shadow(0 0 20px #34e3f0)':'none'}
+  requestAnimationFrame(loop)})();
+</script>
+</body>
+</html>
