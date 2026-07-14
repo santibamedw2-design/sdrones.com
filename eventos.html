@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDRONES Eventos — Fotografía y video profesional para eventos con drones y cámaras</title>
+<meta name="description" content="Cobertura profesional de eventos con drones y cámaras profesionales: bodas, XV años, corporativos, conciertos y más. Tu evento desde todos los ángulos.">
+<meta property="og:title" content="SDRONES Eventos — Tu evento desde todos los ángulos">
+<meta property="og:description" content="Fotografía y videografía profesional para eventos, con drones y cámaras de cine.">
+<meta property="og:image" content="assets/img/hero-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- Fondo interactivo -->
+<div class="bg-glow" aria-hidden="true"></div>
+<div class="bg-grid" aria-hidden="true"></div>
+<canvas id="bgParticles" aria-hidden="true"></canvas>
+
+<!-- Encabezado -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="brand"><img src="assets/img/logo-nombre.png" alt="SDRONES" class="brand-logo"></a>
+    <nav class="main-nav" aria-label="Secciones">
+      <a href="index.html">Inmobiliario</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#equipo">Nosotros</a>
+      <a href="#paquetes">Paquetes</a>
+    </nav>
+    <a href="#cotizar" class="btn btn-primary header-cta">Cotiza tu evento</a>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Menú móvil -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">✕</button>
+  <div class="mobile-menu-inner">
+    <img src="assets/img/logo-nombre.png" alt="" class="mobile-menu-logo">
+    <nav id="mobileNav" aria-label="Secciones móvil">
+      <a href="index.html">Inmobiliario</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#equipo">Nosotros</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#cotizar" class="hl">Cotiza tu evento</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <video src="assets/video/eventos/hero-eventos.mp4" poster="assets/img/eventos/ev-america-1.jpg" autoplay muted loop playsinline></video>
+  </div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span class="dot"></span>Eventos · Drones + cámaras profesionales</span>
+    <h1>Tu evento, desde <em>todos los ángulos.</em></h1>
+    <p>Fotografía y videografía profesional para eventos: cobertura aérea con dron y cámaras de cine a nivel de piso. Bodas, XV años, corporativos, conciertos y celebraciones que merecen recordarse en grande.</p>
+    <div class="hero-cta">
+      <a href="#cotizar" class="btn btn-primary">Cotiza tu evento →</a>
+      <a href="#servicios" class="btn btn-ghost">Ver qué incluye</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>2+</b><span>Cámaras por evento</span></div>
+      <div class="stat"><b>4K</b><span>Video + aéreo</span></div>
+      <div class="stat"><b>100%</b><span>Momentos cubiertos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee"><div class="marquee-track">
+  <span>Bodas <b>•</b> XV Años <b>•</b> Corporativos <b>•</b> Conciertos <b>•</b> Graduaciones <b>•</b> Deportivos <b>•</b> Sociales <b>•</b> </span>
+  <span>Bodas <b>•</b> XV Años <b>•</b> Corporativos <b>•</b> Conciertos <b>•</b> Graduaciones <b>•</b> Deportivos <b>•</b> Sociales <b>•</b> </span>
+</div></div>
+
+<!-- SERVICIOS -->
+<section class="sec" id="servicios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Cobertura completa</span>
+      <h2>Todo tu evento, <span class="accent">sin perder un momento</span></h2>
+      <p>Combinamos tomas aéreas espectaculares con cobertura profesional en tierra. Nada se nos escapa.</p>
+    </div>
+    <div class="grid-serv">
+      <div class="card reveal"><div class="ico">🚁</div><h3>Tomas aéreas del evento</h3><p>El dron captura la magnitud de tu celebración: la llegada, el lugar, los invitados y esos momentos que solo se aprecian desde el aire.</p></div>
+      <div class="card reveal"><div class="ico">📷</div><h3>Fotografía profesional</h3><p>Cámaras profesionales y ojo fotográfico para retratos, detalles y momentos espontáneos con calidad de estudio.</p></div>
+      <div class="card reveal"><div class="ico">🎥</div><h3>Video multicámara</h3><p>Dos o más cámaras en tierra + dron para no perder ninguna reacción: la ceremonia, el brindis, la fiesta completa.</p></div>
+      <div class="card reveal"><div class="ico">🎬</div><h3>Highlight cinematográfico</h3><p>Un video resumen de 2 a 4 minutos con edición de cine: color, música y ritmo que emocionan al volverlo a ver.</p></div>
+      <div class="card reveal"><div class="ico">📱</div><h3>Reels del evento</h3><p>Clips verticales listos para Instagram y TikTok, para que presumas tu evento mientras sigue la fiesta o al día siguiente.</p></div>
+      <div class="card reveal"><div class="ico">💾</div><h3>Entrega completa</h3><p>Recibes el video principal, los reels y todas las fotos editadas en galería digital lista para compartir con tus invitados.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO (en preparación) -->
+<section class="sec" id="portafolio" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Portafolio</span>
+      <h2>Eventos que hemos <span class="accent">capturado</span></h2>
+      <p>Desfiles, rodadas, deportivos, sociales y celebraciones — desde el aire y a nivel de piso.</p>
+    </div>
+    <div class="gallery reveal" id="galeriaEventos">
+      <a class="g-wide g-tall" href="assets/video/eventos/sacbe1.mp4" target="_blank"><video src="assets/video/eventos/sacbe1.mp4" muted loop autoplay playsinline></video><span class="g-tag">Sacbe · Aéreo cinematográfico</span></a>
+      <a href="assets/img/eventos/ev-america-1.jpg" target="_blank"><img src="assets/img/eventos/ev-america-1.jpg" alt="Desfile aéreo Ángel de la Independencia" loading="lazy"><span class="g-tag">Desfile · Ángel</span></a>
+      <a href="assets/img/eventos/ev-graduacion-1.jpg" target="_blank"><img src="assets/img/eventos/ev-graduacion-1.jpg" alt="Danza folklórica en graduación" loading="lazy"><span class="g-tag">Graduación · Danza</span></a>
+      <a class="g-tall" href="assets/video/eventos/sacbe2.mp4" target="_blank"><video src="assets/video/eventos/sacbe2.mp4" muted loop autoplay playsinline></video><span class="g-tag">Sacbe · Toma aérea</span></a>
+      <a href="assets/img/eventos/ev-football-1.jpg" target="_blank"><img src="assets/img/eventos/ev-football-1.jpg" alt="Afición en evento deportivo" loading="lazy"><span class="g-tag">Deportivo · Afición</span></a>
+      <a href="assets/img/eventos/ev-cantina-1.jpg" target="_blank"><img src="assets/img/eventos/ev-cantina-1.jpg" alt="Ambiente de cantina" loading="lazy"><span class="g-tag">Cantina · Ambiente</span></a>
+      <a class="g-wide" href="assets/img/eventos/ev-america-2.jpg" target="_blank"><img src="assets/img/eventos/ev-america-2.jpg" alt="Evento masivo con público" loading="lazy"><span class="g-tag">Evento masivo</span></a>
+      <a href="assets/img/eventos/ev-rebel-1.jpg" target="_blank"><img src="assets/img/eventos/ev-rebel-1.jpg" alt="Rodada de motos vista aérea" loading="lazy"><span class="g-tag">Rodada · Aéreo</span></a>
+      <a href="assets/img/eventos/ev-boda-1.jpg" target="_blank"><img src="assets/img/eventos/ev-boda-1.jpg" alt="Cobertura de evento social" loading="lazy"><span class="g-tag">Social · Evento</span></a>
+      <a href="assets/img/eventos/ev-destacado1-1.jpg" target="_blank"><img src="assets/img/eventos/ev-destacado1-1.jpg" alt="Rodada de autos" loading="lazy"><span class="g-tag">Rodada de autos</span></a>
+      <a href="assets/img/eventos/ev-graduacion-2.jpg" target="_blank"><img src="assets/img/eventos/ev-graduacion-2.jpg" alt="Ceremonia de graduación" loading="lazy"><span class="g-tag">Ceremonia</span></a>
+      <a href="assets/img/eventos/ev-cantina-2.jpg" target="_blank"><img src="assets/img/eventos/ev-cantina-2.jpg" alt="Evento nocturno" loading="lazy"><span class="g-tag">Nocturno</span></a>
+      <a class="g-wide" href="assets/img/eventos/ev-america-3.jpg" target="_blank"><img src="assets/img/eventos/ev-america-3.jpg" alt="Monumento iluminado de noche" loading="lazy"><span class="g-tag">Monumento iluminado</span></a>
+      <a href="assets/img/eventos/ev-football-2.jpg" target="_blank"><img src="assets/img/eventos/ev-football-2.jpg" alt="Estadio lleno" loading="lazy"><span class="g-tag">Estadio</span></a>
+      <a href="assets/img/eventos/ev-rebel-2.jpg" target="_blank"><img src="assets/img/eventos/ev-rebel-2.jpg" alt="Motos panorámica aérea" loading="lazy"><span class="g-tag">Motos · Panorámica</span></a>
+      <a href="assets/img/eventos/ev-boda-2.jpg" target="_blank"><img src="assets/img/eventos/ev-boda-2.jpg" alt="Sesión en locación" loading="lazy"><span class="g-tag">Sesión en locación</span></a>
+      <a href="assets/img/eventos/ev-destacado1-2.jpg" target="_blank"><img src="assets/img/eventos/ev-destacado1-2.jpg" alt="Avenida vista aérea" loading="lazy"><span class="g-tag">Avenida</span></a>
+      <a href="assets/img/eventos/ev-destacado1-3.jpg" target="_blank"><img src="assets/img/eventos/ev-destacado1-3.jpg" alt="Recorrido aéreo" loading="lazy"><span class="g-tag">Recorrido aéreo</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- BANDA DE VIDEO -->
+<section class="video-band">
+  <video src="assets/video/eventos/band-eventos.mp4" poster="assets/img/eventos/ev-graduacion-1.jpg" autoplay muted loop playsinline></video>
+  <div class="band-inner reveal">
+    <h2>Cada evento, una <span class="accent">historia que se vuelve a ver</span></h2>
+    <p>Del aire al detalle: capturamos la energía completa de tu celebración.</p>
+    <a href="#cotizar" class="btn btn-primary">Cotiza tu evento →</a>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="sec" id="proceso" style="background:linear-gradient(180deg,transparent,rgba(52,227,240,.03),transparent)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Cómo trabajamos</span>
+      <h2>De la cotización al <span class="accent">recuerdo</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Cotiza</h3><p>Nos cuentas de tu evento por WhatsApp y te damos precio claro según fecha, lugar y cobertura.</p></div>
+      <div class="step reveal"><h3>Planeamos</h3><p>Definimos juntos los momentos clave: lo que no puede faltar en tu video y tus fotos.</p></div>
+      <div class="step reveal"><h3>Cubrimos</h3><p>El día del evento llegamos antes, con dron y cámaras listos. Tú disfruta; nosotros capturamos.</p></div>
+      <div class="step reveal"><h3>Entregamos</h3><p>Recibes tu highlight, reels y galería completa de fotos editadas para revivirlo cuando quieras.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section class="sec" id="equipo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Quiénes somos</span>
+      <h2>El equipo detrás de <span class="accent">cada evento</span></h2>
+      <p>Un equipo joven, técnico y creativo que hace que tu evento se vea y se sienta espectacular.</p>
+    </div>
+    <div class="team-grid">
+      <div class="member reveal">
+        <div class="member-ph"><img src="assets/img/team-santiago.jpg" alt="Santiago Barrios Medina"></div>
+        <div class="member-body"><h3>Santiago Barrios Medina</h3><div class="member-role">Director y Productor</div>
+          <p>Ingeniero en software y piloto de drones. Dirige la producción y la cobertura de cada evento.</p></div>
+      </div>
+      <div class="member reveal">
+        <div class="member-ph"><img src="assets/img/team-sara.jpg" alt="Sara Chavira"></div>
+        <div class="member-body"><h3>Sara Chavira</h3><div class="member-role">Directora Creativa</div>
+          <p>Fotógrafa profesional y creadora de contenido. Define el estilo visual y la narrativa de cada entrega.</p></div>
+      </div>
+      <div class="member reveal">
+        <div class="member-ph"><img src="assets/img/team-felipe.jpg" alt="Felipe Barrios Treviño"></div>
+        <div class="member-body"><h3>Felipe Barrios Treviño</h3><div class="member-role">2ª Cámara · Calidad</div>
+          <p>Segunda cámara y supervisor de calidad. Se asegura de que cada toma cumpla el estándar SDrones.</p></div>
+      </div>
+      <div class="member reveal">
+        <div class="member-ph"><img src="assets/img/team-alberto.jpg" alt="Alberto Mendoza"></div>
+        <div class="member-body"><h3>Alberto Mendoza</h3><div class="member-role">Editor · Community · 3ª Cámara</div>
+          <p>Editor profesional y community manager. Convierte el material en piezas listas para compartir y para redes.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAQUETES -->
+<section class="sec" id="paquetes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Cobertura a tu medida</span>
+      <h2>Elige cuánto quieres <span class="accent">recordar</span></h2>
+      <p>Cada evento es distinto: cotizamos según fecha, lugar, horas de cobertura e invitados. Estos son los niveles.</p>
+    </div>
+    <div class="grid-price">
+      <div class="price reveal">
+        <h3>Momentos</h3>
+        <p class="desc">Para eventos íntimos que quieren lo esencial bien hecho.</p>
+        <div class="amt" style="font-size:1.6rem">Cotización<br>personalizada</div>
+        <div class="from">Cobertura esencial</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Hasta 3 horas de cobertura</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>1 cámara profesional + dron</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Video resumen 1-2 min</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>50 fotos editadas</li>
+        </ul>
+        <a href="#cotizar" class="btn btn-ghost">Cotizar</a>
+      </div>
+      <div class="price feat reveal">
+        <span class="tag">EL FAVORITO</span>
+        <h3>Celebración</h3>
+        <p class="desc">La cobertura completa para bodas, XV años y eventos grandes.</p>
+        <div class="amt" style="font-size:1.6rem">Cotización<br>personalizada</div>
+        <div class="from">Cobertura completa</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Hasta 8 horas de cobertura</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>2 cámaras profesionales + dron</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Highlight cinematográfico 3-4 min</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>2 reels verticales para redes</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Galería completa de fotos editadas</li>
+        </ul>
+        <a href="#cotizar" class="btn btn-primary">Cotizar ahora</a>
+      </div>
+      <div class="price reveal">
+        <h3>Producción</h3>
+        <p class="desc">Corporativos, conciertos y eventos que exigen nivel broadcast.</p>
+        <div class="amt" style="font-size:1.6rem">Cotización<br>personalizada</div>
+        <div class="from">Cobertura premium</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Cobertura de día completo</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Equipo multicámara + dron</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Video institucional / aftermovie</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Pack de contenido para redes</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Entrega express de seleccionadas</li>
+        </ul>
+        <a href="#cotizar" class="btn btn-ghost">Cotizar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COTIZAR -->
+<section class="sec" id="cotizar">
+  <div class="wrap">
+    <div class="split">
+      <div class="form-box reveal">
+        <span class="eyebrow"><span class="dot"></span>Cotiza tu evento</span>
+        <h2 style="margin-top:14px">Cuéntanos de tu evento</h2>
+        <p>Responde estas preguntas y te mandamos tu cotización por WhatsApp el mismo día.</p>
+        <form id="leadForm" data-intro="Hola SDRONES, quiero cotizar la cobertura de mi evento.">
+          <div class="field"><label>¿Qué tipo de evento es?</label>
+            <select name="evento" required><option value="" disabled selected>Selecciona…</option><option>Boda</option><option>XV años</option><option>Corporativo / Empresa</option><option>Concierto / Festival</option><option>Graduación</option><option>Deportivo</option><option>Otro</option></select></div>
+          <div class="field"><label>¿En qué ciudad será?</label>
+            <input name="ciudad" placeholder="Ej. Ciudad de México" required></div>
+          <div class="field"><label>¿Qué fecha (aproximada)?</label>
+            <input name="fecha" placeholder="Ej. 14 de septiembre" required></div>
+          <div class="field"><label>¿Cuántos invitados aproximadamente?</label>
+            <select name="invitados" required><option value="" disabled selected>Selecciona…</option><option>Menos de 50</option><option>50 - 150</option><option>150 - 400</option><option>Más de 400</option></select></div>
+          <div class="field"><label>¿Qué necesitas?</label>
+            <select name="necesitas" required><option value="" disabled selected>Selecciona…</option><option>Solo video</option><option>Solo fotografía</option><option>Foto y video completos</option><option>Aún no sé, quiero asesoría</option></select></div>
+          <button type="submit" class="btn btn-wa" style="width:100%;justify-content:center;margin-top:6px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.6.2-.2.3-.7 1-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.7-3.3-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.8.8-1 1.9-.6 3.2.5 1.6 1.6 3 3.1 4.1 2.1 1.6 3.7 1.9 4.5 1.7.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.2-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            Recibir cotización por WhatsApp
+          </button>
+        </form>
+      </div>
+      <div class="aside-box reveal">
+        <h3>Por qué con SDrones</h3>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Dron + cámaras profesionales en un solo equipo: sin coordinar dos proveedores.</div>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Edición cinematográfica: color, música y ritmo que emocionan.</div>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Reels listos para presumir tu evento en redes.</div>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Cotización clara el mismo día, sin letras chiquitas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO GRANDE METÁLICO -->
+<section class="brandshow">
+  <div class="wrap">
+    <div class="logo-big reveal"></div>
+    <h2 class="reveal">Un evento solo pasa <span class="accent">una vez.</span></h2>
+    <p class="reveal">Asegúrate de recordarlo como se vivió. Cotiza la cobertura de tu evento hoy.</p>
+    <a href="#cotizar" class="btn btn-primary reveal">Cotiza tu evento →</a>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <a href="index.html" class="brand"><img src="assets/img/logo-nombre.png" alt="SDRONES" class="brand-logo"></a>
+        <p>Fotografía y videografía profesional para eventos con drones y cámaras de cine. Tu evento, desde todos los ángulos.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Eventos</h4>
+        <a href="#servicios">Bodas y XV años</a><a href="#servicios">Corporativos</a>
+        <a href="#servicios">Conciertos</a><a href="#paquetes">Paquetes</a>
+      </div>
+      <div class="foot-col">
+        <h4>Empresa</h4>
+        <a href="index.html">Inmobiliario</a><a href="#portafolio">Portafolio</a><a href="#cotizar">Cotizar</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <a href="https://wa.me/5215578889720" target="_blank">WhatsApp 55 7888 9720</a>
+        <a href="mailto:contacto@sdronesmx.com">contacto@sdronesmx.com</a>
+        <div class="socials" style="margin-top:16px">
+          <a href="https://www.facebook.com/profile.php?id=61581254027429" target="_blank" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg></a>
+          <a href="https://www.instagram.com/s_drones.es/" target="_blank" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.tiktok.com/@s_drones" target="_blank" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2 1.6 3.6 3.6 3.9v2.8c-1.3.1-2.5-.3-3.6-1v5.9c0 3.3-2.4 5.4-5.3 5.4-3 0-5.2-2.4-5.2-5.3 0-3 2.5-5.3 5.7-5v2.9c-.4-.1-.8-.2-1.2-.2-1.4 0-2.4 1-2.4 2.4 0 1.4 1 2.4 2.4 2.4 1.4 0 2.5-1 2.5-2.7V3H16z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SDRONES · Todos los derechos reservados.</span>
+      <span>Cobertura profesional de eventos · México</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5215578889720?text=Hola%20SDRONES%2C%20quiero%20cotizar%20la%20cobertura%20de%20mi%20evento." class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.6.2-.2.3-.7 1-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.7-3.3-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.8.8-1 1.9-.6 3.2.5 1.6 1.6 3 3.1 4.1 2.1 1.6 3.7 1.9 4.5 1.7.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.2-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+<script src="assets/js/fx.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

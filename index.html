@@ -13,275 +13,55 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="stylesheet" href="assets/css/style.css">
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<style>
-:root{
-  --bg:#08090b; --bg2:#0e1013; --panel:#14171c; --panel2:#1b1f26;
-  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
-  --white:#f3f6fa; --gray:#9aa3ad; --gray2:#6b7480;
-  --accent:#34e3f0; --accent2:#12b6c6; --accent-glow:rgba(52,227,240,.35);
-  --r:20px;
-  --font:'Outfit',system-ui,sans-serif; --disp:'Space Grotesk','Outfit',sans-serif;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--white);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-section{position:relative}
-.wrap{width:min(1200px,92vw);margin:0 auto}
-h1,h2,h3{font-family:var(--disp);font-weight:700;line-height:1.08;letter-spacing:-.02em}
-.accent{color:var(--accent)}
-.muted{color:var(--gray)}
-
-/* fondo global con glow + grid */
-.bg-fx{position:fixed;inset:0;z-index:-2;background:
-  radial-gradient(900px 600px at 80% -5%, rgba(52,227,240,.10), transparent 60%),
-  radial-gradient(700px 500px at 5% 20%, rgba(52,227,240,.06), transparent 55%),
-  linear-gradient(180deg,var(--bg),var(--bg2))}
-.bg-grid{position:fixed;inset:0;z-index:-1;opacity:.4;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:64px 64px;mask:radial-gradient(circle at 50% 30%,#000,transparent 75%)}
-canvas#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-
-/* ---------- header ---------- */
-header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.35s}
-header.scrolled{background:rgba(8,9,11,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;gap:24px;height:104px}
-.brand{display:flex;align-items:center;gap:12px;font-family:var(--disp);font-weight:700;font-size:1.25rem;letter-spacing:.04em}
-.brand-logo{height:132px;filter:brightness(0) invert(1);transition:.35s}
-.brand:hover .brand-logo{filter:brightness(0) invert(1) drop-shadow(0 0 12px var(--accent))}
-.brand b{font-weight:800}.brand span{color:var(--accent)}
-.nav-links{display:flex;gap:26px;margin-left:auto}
-.nav-links a{font-size:.94rem;color:var(--gray);font-weight:500;transition:.2s;position:relative}
-.nav-links a:hover{color:var(--white)}
-.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:.25s}
-.nav-links a:hover::after{width:100%}
-.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:100px;font-weight:600;font-size:.95rem;cursor:pointer;border:none;transition:.25s;font-family:var(--font)}
-.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04212a;box-shadow:0 6px 26px var(--accent-glow)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px var(--accent-glow)}
-.btn-ghost{background:rgba(255,255,255,.05);color:var(--white);border:1px solid var(--line2)}
-.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:var(--accent)}
-.btn-wa{background:#1faa53;color:#fff;box-shadow:0 6px 22px rgba(31,170,83,.35)}
-.btn-wa:hover{transform:translateY(-2px)}
-.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
-.burger span{width:26px;height:2.5px;background:var(--white);border-radius:2px;transition:.3s}
-
-/* ---------- hero ---------- */
-.hero{min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:140px 0 60px}
-.hero-video{position:absolute;inset:0;z-index:-1}
-.hero-video video{width:100%;height:100%;object-fit:cover}
-.hero-video::after{content:"";position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(8,9,11,.72),rgba(8,9,11,.55) 40%,var(--bg) 96%),
-  linear-gradient(90deg,rgba(8,9,11,.85),transparent 70%)}
-.hero-inner{max-width:760px}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border:1px solid var(--line2);border-radius:100px;
-  font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(52,227,240,.06);margin-bottom:26px;font-weight:600}
-.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
-.hero h1{font-size:clamp(2.4rem,6vw,4.6rem);margin-bottom:22px}
-.hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 40px var(--accent-glow)}
-.hero p{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--gray);max-width:600px;margin-bottom:36px}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-.hero-stats{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
-.stat b{font-family:var(--disp);font-size:2.2rem;color:var(--white);display:block;line-height:1}
-.stat span{font-size:.85rem;color:var(--gray);text-transform:uppercase;letter-spacing:.08em}
-
-/* ---------- marquee ---------- */
-.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;background:rgba(255,255,255,.015)}
-.marquee-track{display:flex;gap:60px;white-space:nowrap;animation:scroll 26s linear infinite;font-family:var(--disp);font-weight:600;color:var(--gray2);font-size:1.05rem}
-.marquee-track span{display:inline-flex;align-items:center;gap:60px}
-.marquee-track b{color:var(--accent)}
-@keyframes scroll{to{transform:translateX(-50%)}}
-
-/* ---------- secciones ---------- */
-.sec{padding:110px 0}
-.sec-head{text-align:center;max-width:680px;margin:0 auto 60px}
-.sec-head .eyebrow{margin-bottom:18px}
-.sec-head h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:16px}
-.sec-head p{color:var(--gray);font-size:1.1rem}
-
-/* servicios */
-.grid-serv{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:34px 30px;transition:.3s}
-.card:hover{border-color:var(--line2);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-.card .ico{width:56px;height:56px;border-radius:15px;background:rgba(52,227,240,.1);border:1px solid rgba(52,227,240,.25);
-  display:grid;place-items:center;color:var(--accent);margin-bottom:22px;font-size:1.5rem}
-.card h3{font-size:1.3rem;margin-bottom:10px}
-.card p{color:var(--gray);font-size:.98rem}
-
-/* portafolio */
-.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
-.gallery a{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
-.gallery a img,.gallery a video{width:100%;height:100%;object-fit:cover;transition:.5s}
-.gallery a:hover img,.gallery a:hover video{transform:scale(1.08)}
-.gallery a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.6));opacity:0;transition:.3s}
-.gallery a:hover::after{opacity:1}
-.g-tall{grid-row:span 2}.g-wide{grid-column:span 2}
-.g-tag{position:absolute;left:14px;bottom:14px;z-index:2;font-size:.8rem;font-weight:600;opacity:0;transform:translateY(8px);transition:.3s;color:#fff}
-.gallery a:hover .g-tag{opacity:1;transform:none}
-
-/* proceso */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
-.step{position:relative;padding:32px 26px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}
-.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--disp);font-size:2.6rem;font-weight:700;color:var(--accent);opacity:.35;display:block;margin-bottom:12px}
-.step h3{font-size:1.15rem;margin-bottom:8px}.step p{color:var(--gray);font-size:.94rem}
-
-/* precios */
-.grid-price{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
-.price{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:38px 32px;transition:.3s}
-.price:hover{transform:translateY(-6px);border-color:var(--line2)}
-.price.feat{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 24px 60px var(--accent-glow);position:relative}
-.price.feat .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04212a;font-size:.75rem;font-weight:700;padding:6px 16px;border-radius:100px;letter-spacing:.06em}
-.price h3{font-size:1.4rem;margin-bottom:6px}
-.price .desc{color:var(--gray);font-size:.9rem;margin-bottom:22px;min-height:40px}
-.price .amt{font-family:var(--disp);font-size:2.6rem;font-weight:700;margin-bottom:4px}
-.price .amt small{font-size:1rem;color:var(--gray);font-weight:500}
-.price .from{font-size:.82rem;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:24px}
-.price ul{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:12px}
-.price li{display:flex;gap:11px;font-size:.95rem;color:var(--white)}
-.price li svg{flex-shrink:0;color:var(--accent);margin-top:3px}
-.price .btn{width:100%;justify-content:center}
-
-/* formulario / agenda */
-.split{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:start}
-.form-box{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:40px}
-.form-box h2{font-size:1.9rem;margin-bottom:8px}.form-box>p{color:var(--gray);margin-bottom:26px}
-.field{margin-bottom:18px}
-.field label{display:block;font-size:.88rem;font-weight:600;margin-bottom:8px;color:var(--white)}
-.field input,.field select{width:100%;padding:13px 15px;background:var(--bg);border:1px solid var(--line2);border-radius:12px;color:var(--white);font-family:var(--font);font-size:.96rem;transition:.2s}
-.field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
-.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2334e3f0' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
-.aside-box{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:34px;position:sticky;top:100px}
-.aside-box h3{font-size:1.3rem;margin-bottom:18px}
-.chk{display:flex;gap:12px;margin-bottom:16px;color:var(--gray);font-size:.96rem}
-.chk svg{color:var(--accent);flex-shrink:0;margin-top:2px}
-.calendly{margin-top:24px;padding:22px;border:1px dashed var(--line2);border-radius:14px;text-align:center;color:var(--gray);font-size:.9rem}
-
-/* footer */
-footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2)}
-.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px}
-.foot-brand{max-width:320px}
-.foot-brand .brand{margin-bottom:16px}
-.foot-brand p{color:var(--gray);font-size:.95rem}
-.foot-col h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gray2);margin-bottom:16px}
-.foot-col a{display:block;color:var(--gray);margin-bottom:10px;font-size:.96rem;transition:.2s}
-.foot-col a:hover{color:var(--accent)}
-.foot-bottom{border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;color:var(--gray2);font-size:.86rem;flex-wrap:wrap;gap:10px}
-
-/* whatsapp flotante */
-.wa-float{position:fixed;bottom:26px;right:26px;z-index:60;width:62px;height:62px;border-radius:50%;background:#25d366;
-  display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.45);animation:pulse 2.6s infinite;transition:.3s}
-.wa-float:hover{transform:scale(1.08)}
-@keyframes pulse{0%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 10px 30px rgba(37,211,102,.45)}}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(30px);transition:.7s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-
-/* cursor personalizado */
-@media(pointer:fine){
-  *,a,button,select,input,textarea,label,.btn,.gallery a{cursor:none!important}
-  .cursor{position:fixed;top:0;left:0;width:32px;height:38px;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;
-    background:var(--accent);-webkit-mask:url(assets/img/float-s.png) center/contain no-repeat;mask:url(assets/img/float-s.png) center/contain no-repeat;
-    filter:drop-shadow(0 0 6px var(--accent));transition:width .2s,height .2s,filter .2s;will-change:transform}
-  .cursor-dot{display:none}
-  .cursor.grow{width:62px;height:86px}
-  .cursor.click{filter:drop-shadow(0 0 18px var(--accent)) brightness(1.5)}
-}
-.click-ring{position:fixed;border:2px solid var(--accent);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9998;animation:clickR .6s ease-out forwards;box-shadow:0 0 20px var(--accent-glow)}
-@keyframes clickR{from{width:8px;height:8px;opacity:.9}to{width:100px;height:100px;opacity:0}}
-
-/* logos flotantes de fondo (la S en varios colores, tipo ecos) */
-.floaters{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.floater{position:absolute;opacity:.07;will-change:transform;transition:opacity .5s,filter .3s;
-  -webkit-mask:url(assets/img/float-s.png) center/contain no-repeat;mask:url(assets/img/float-s.png) center/contain no-repeat}
-.floater.cy{background:var(--accent)}.floater.wh{background:#fff}.floater.sl{background:#7f93ab}
-
-/* quiénes somos */
-.team{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.member{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.35s}
-.member:hover{transform:translateY(-7px);border-color:var(--accent);box-shadow:0 26px 54px rgba(0,0,0,.5)}
-.member-ph{aspect-ratio:4/5;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 25%,var(--panel2),var(--bg))}
-.member-ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.05);transition:.5s}
-.member:hover .member-ph img{filter:grayscale(0);transform:scale(1.06)}
-.member-ph.empty{display:grid;place-items:center}
-.member-ph.empty .ini{font-family:var(--disp);font-size:3.4rem;font-weight:700;color:var(--accent);opacity:.5}
-.member-ph.empty span.soon{position:absolute;bottom:14px;font-size:.72rem;color:var(--gray2);letter-spacing:.1em;text-transform:uppercase}
-.member-body{padding:22px}
-.member-body h3{font-size:1.12rem;margin-bottom:3px}
-.member-role{color:var(--accent);font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px}
-.member-body p{color:var(--gray);font-size:.88rem;line-height:1.5}
-
-/* sección logo grande metálico */
-.brandshow{padding:130px 0;text-align:center;position:relative;overflow:hidden}
-.brandshow .logo-big{position:relative;display:inline-block;width:min(660px,86vw);height:min(230px,30vw)}
-.brandshow .logo-big::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#e8eef5,#9fb0c4);
-  -webkit-mask:url(assets/img/logo-nombre.png) center/contain no-repeat;mask:url(assets/img/logo-nombre.png) center/contain no-repeat;filter:drop-shadow(0 0 34px rgba(52,227,240,.35))}
-.brandshow .logo-big::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.95) 48%,var(--accent) 52%,transparent 58%);
-  background-size:230% 100%;background-repeat:no-repeat;
-  -webkit-mask:url(assets/img/logo-nombre.png) center/contain no-repeat;mask:url(assets/img/logo-nombre.png) center/contain no-repeat;
-  mix-blend-mode:screen;animation:shine 4.8s ease-in-out infinite}
-@keyframes shine{0%{background-position:190% 0}100%{background-position:-90% 0}}
-.brandshow h2{font-size:clamp(1.6rem,3.6vw,2.7rem);margin-top:38px}
-.brandshow p{color:var(--gray);margin:12px auto 32px;max-width:540px;font-size:1.05rem}
-
-/* redes */
-.socials{display:flex;gap:12px}
-.socials a{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line2);color:var(--gray);transition:.25s}
-.socials a:hover{background:var(--accent);color:#04212a;border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 22px var(--accent-glow)}
-
-@media(max-width:900px){
-  .nav-links{display:none}.burger{display:flex}
-  .grid-serv,.steps,.grid-price{grid-template-columns:1fr}
-  .team{grid-template-columns:repeat(2,1fr)}
-  .brand-logo{height:44px}
-  .nav{height:78px}
-  .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}
-  .split{grid-template-columns:1fr}.aside-box{position:static}
-  .g-wide{grid-column:span 2}
-  .hero-stats{gap:26px}
-  .mobile-menu.open{display:flex}
-}
-.mobile-menu{display:none;position:fixed;inset:0;z-index:55;background:rgba(8,9,11,.97);backdrop-filter:blur(10px);
-  flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.mobile-menu a{font-family:var(--disp);font-size:1.6rem;color:var(--white)}
-.mobile-menu .close{position:absolute;top:24px;right:26px;font-size:2rem;background:none;border:none;color:#fff;cursor:pointer}
-</style>
 </head>
 <body>
-<div class="bg-fx"></div>
-<div class="bg-grid"></div>
-<div class="floaters" id="floaters"></div>
-<canvas id="stars"></canvas>
-<div class="cursor" id="cur"></div>
 
-<!-- HEADER -->
-<header id="hdr">
-  <div class="wrap nav">
-    <a href="#" class="brand"><img src="assets/img/logo-nombre.png" alt="SDRONES" class="brand-logo"></a>
-    <nav class="nav-links">
+<!-- Fondo interactivo -->
+<div class="bg-glow" aria-hidden="true"></div>
+<div class="bg-grid" aria-hidden="true"></div>
+<canvas id="bgParticles" aria-hidden="true"></canvas>
+
+<!-- Encabezado -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="brand"><img src="assets/img/logo-nombre.png" alt="SDRONES" class="brand-logo"></a>
+    <nav class="main-nav" aria-label="Secciones">
       <a href="#servicios">Servicios</a>
       <a href="#portafolio">Portafolio</a>
       <a href="#equipo">Nosotros</a>
       <a href="#precios">Precios</a>
-      <a href="#agenda">Agendar</a>
+      <a href="eventos.html">Eventos</a>
     </nav>
-    <a href="#agenda" class="btn btn-primary" style="margin-left:8px">Agenda tu llamada</a>
-    <button class="burger" id="burger"><span></span><span></span><span></span></button>
+    <a href="#agenda" class="btn btn-primary header-cta">Agenda tu llamada</a>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
-<div class="mobile-menu" id="mmenu">
-  <button class="close" id="mclose">✕</button>
-  <a href="#servicios">Servicios</a><a href="#portafolio">Portafolio</a>
-  <a href="#precios">Precios</a><a href="#proceso">Proceso</a>
-  <a href="#agenda" class="accent">Agenda tu llamada</a>
+
+<!-- Menú móvil -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">✕</button>
+  <div class="mobile-menu-inner">
+    <img src="assets/img/logo-nombre.png" alt="" class="mobile-menu-logo">
+    <nav id="mobileNav" aria-label="Secciones móvil">
+      <a href="#servicios">Servicios</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#equipo">Nosotros</a>
+      <a href="#precios">Precios</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="#agenda" class="hl">Agenda tu llamada</a>
+    </nav>
+  </div>
 </div>
 
+<main>
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-video">
+  <div class="hero-media">
     <video src="assets/video/hero.mp4" poster="assets/img/hero-poster.jpg" autoplay muted loop playsinline></video>
   </div>
   <div class="wrap hero-inner">
@@ -335,25 +115,25 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2
     </div>
     <div class="gallery reveal">
       <a class="g-wide g-tall" href="assets/video/portafolio.mp4" target="_blank"><video src="assets/video/portafolio.mp4" muted loop autoplay playsinline></video><span class="g-tag">Desarrollo · Gap Metropolitana</span></a>
-      <a href="assets/img/p1.jpg" target="_blank"><img src="assets/img/p1.jpg" alt="" loading="lazy"><span class="g-tag">Residencial</span></a>
-      <a href="assets/img/p2.jpg" target="_blank"><img src="assets/img/p2.jpg" alt="" loading="lazy"><span class="g-tag">Casa con jardín</span></a>
+      <a href="assets/img/p1.jpg" target="_blank"><img src="assets/img/p1.jpg" alt="Residencial" loading="lazy"><span class="g-tag">Residencial</span></a>
+      <a href="assets/img/p2.jpg" target="_blank"><img src="assets/img/p2.jpg" alt="Casa con jardín" loading="lazy"><span class="g-tag">Casa con jardín</span></a>
       <a class="g-tall" href="assets/video/portafolio2.mp4" target="_blank"><video src="assets/video/portafolio2.mp4" muted loop autoplay playsinline></video><span class="g-tag">Acapulco · Costa extrema</span></a>
-      <a href="assets/img/p3.jpg" target="_blank"><img src="assets/img/p3.jpg" alt="" loading="lazy"><span class="g-tag">Fraccionamiento</span></a>
-      <a href="assets/img/p4.jpg" target="_blank"><img src="assets/img/p4.jpg" alt="" loading="lazy"><span class="g-tag">Vista aérea</span></a>
-      <a href="assets/img/p5.jpg" target="_blank"><img src="assets/img/p5.jpg" alt="" loading="lazy"><span class="g-tag">Mansión</span></a>
-      <a href="assets/img/p6.jpg" target="_blank"><img src="assets/img/p6.jpg" alt="" loading="lazy"><span class="g-tag">Residencial</span></a>
-      <a class="g-wide" href="assets/img/p10.jpg" target="_blank"><img src="assets/img/p10.jpg" alt="" loading="lazy"><span class="g-tag">Desarrollo urbano</span></a>
-      <a href="assets/img/p7.jpg" target="_blank"><img src="assets/img/p7.jpg" alt="" loading="lazy"><span class="g-tag">Avance de obra</span></a>
-      <a href="assets/img/p8.jpg" target="_blank"><img src="assets/img/p8.jpg" alt="" loading="lazy"><span class="g-tag">Condominios</span></a>
-      <a href="assets/img/p9.jpg" target="_blank"><img src="assets/img/p9.jpg" alt="" loading="lazy"><span class="g-tag">Panorámica</span></a>
+      <a href="assets/img/p3.jpg" target="_blank"><img src="assets/img/p3.jpg" alt="Fraccionamiento" loading="lazy"><span class="g-tag">Fraccionamiento</span></a>
+      <a href="assets/img/p4.jpg" target="_blank"><img src="assets/img/p4.jpg" alt="Vista aérea" loading="lazy"><span class="g-tag">Vista aérea</span></a>
+      <a href="assets/img/p5.jpg" target="_blank"><img src="assets/img/p5.jpg" alt="Mansión" loading="lazy"><span class="g-tag">Mansión</span></a>
+      <a href="assets/img/p6.jpg" target="_blank"><img src="assets/img/p6.jpg" alt="Residencial" loading="lazy"><span class="g-tag">Residencial</span></a>
+      <a class="g-wide" href="assets/img/p10.jpg" target="_blank"><img src="assets/img/p10.jpg" alt="Desarrollo urbano" loading="lazy"><span class="g-tag">Desarrollo urbano</span></a>
+      <a href="assets/img/p7.jpg" target="_blank"><img src="assets/img/p7.jpg" alt="Avance de obra" loading="lazy"><span class="g-tag">Avance de obra</span></a>
+      <a href="assets/img/p8.jpg" target="_blank"><img src="assets/img/p8.jpg" alt="Condominios" loading="lazy"><span class="g-tag">Condominios</span></a>
+      <a href="assets/img/p9.jpg" target="_blank"><img src="assets/img/p9.jpg" alt="Panorámica" loading="lazy"><span class="g-tag">Panorámica</span></a>
       <a class="g-tall" href="assets/video/portafolio3.mp4" target="_blank"><video src="assets/video/portafolio3.mp4" muted loop autoplay playsinline></video><span class="g-tag">Toma aérea 4K</span></a>
-      <a href="assets/img/p11.jpg" target="_blank"><img src="assets/img/p11.jpg" alt="" loading="lazy"><span class="g-tag">Construcción</span></a>
-      <a href="assets/img/p12.jpg" target="_blank"><img src="assets/img/p12.jpg" alt="" loading="lazy"><span class="g-tag">Obra en proceso</span></a>
-      <a href="assets/img/p13.jpg" target="_blank"><img src="assets/img/p13.jpg" alt="" loading="lazy"><span class="g-tag">Maquinaria</span></a>
-      <a class="g-wide" href="assets/img/p17.jpg" target="_blank"><img src="assets/img/p17.jpg" alt="" loading="lazy"><span class="g-tag">Fraccionamiento aéreo</span></a>
-      <a href="assets/img/p14.jpg" target="_blank"><img src="assets/img/p14.jpg" alt="" loading="lazy"><span class="g-tag">Residencial</span></a>
-      <a href="assets/img/p15.jpg" target="_blank"><img src="assets/img/p15.jpg" alt="" loading="lazy"><span class="g-tag">Interior</span></a>
-      <a href="assets/img/p16.jpg" target="_blank"><img src="assets/img/p16.jpg" alt="" loading="lazy"><span class="g-tag">Casa residencial</span></a>
+      <a href="assets/img/p11.jpg" target="_blank"><img src="assets/img/p11.jpg" alt="Construcción" loading="lazy"><span class="g-tag">Construcción</span></a>
+      <a href="assets/img/p12.jpg" target="_blank"><img src="assets/img/p12.jpg" alt="Obra en proceso" loading="lazy"><span class="g-tag">Obra en proceso</span></a>
+      <a href="assets/img/p13.jpg" target="_blank"><img src="assets/img/p13.jpg" alt="Maquinaria" loading="lazy"><span class="g-tag">Maquinaria</span></a>
+      <a class="g-wide" href="assets/img/p17.jpg" target="_blank"><img src="assets/img/p17.jpg" alt="Fraccionamiento aéreo" loading="lazy"><span class="g-tag">Fraccionamiento aéreo</span></a>
+      <a href="assets/img/p14.jpg" target="_blank"><img src="assets/img/p14.jpg" alt="Residencial" loading="lazy"><span class="g-tag">Residencial</span></a>
+      <a href="assets/img/p15.jpg" target="_blank"><img src="assets/img/p15.jpg" alt="Interior" loading="lazy"><span class="g-tag">Interior</span></a>
+      <a href="assets/img/p16.jpg" target="_blank"><img src="assets/img/p16.jpg" alt="Casa residencial" loading="lazy"><span class="g-tag">Casa residencial</span></a>
     </div>
   </div>
 </section>
@@ -366,26 +146,26 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2
       <h2>El equipo detrás de <span class="accent">cada toma</span></h2>
       <p>Un equipo joven, técnico y creativo obsesionado con que tus propiedades se vean espectaculares.</p>
     </div>
-    <div class="team">
-      <div class="member reveal">
-        <div class="member-ph"><img src="assets/img/team-santiago.jpg" alt="Santiago Barrios Medina"></div>
-        <div class="member-body"><h3>Santiago Barrios Medina</h3><div class="member-role">Director y Productor</div>
-          <p>Ingeniero en software y piloto de drones. Dirige la producción y la estrategia de cada proyecto.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px">
+      <div class="card reveal" style="padding:0;overflow:hidden">
+        <div style="aspect-ratio:4/5;overflow:hidden"><img src="assets/img/team-santiago.jpg" alt="Santiago Barrios Medina" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="padding:22px"><h3 style="font-size:1.1rem">Santiago Barrios Medina</h3><div style="color:var(--accent);font-size:.78rem;font-weight:600;text-transform:uppercase;margin:4px 0 9px">Director y Productor</div>
+          <p style="color:var(--muted);font-size:.88rem">Ingeniero en software y piloto de drones. Dirige la producción y la estrategia de cada proyecto.</p></div>
       </div>
-      <div class="member reveal">
-        <div class="member-ph"><img src="assets/img/team-sara.jpg" alt="Sara Chavira"></div>
-        <div class="member-body"><h3>Sara Chavira</h3><div class="member-role">Directora Creativa</div>
-          <p>Fotógrafa profesional y creadora de contenido. Define el estilo visual y la narrativa de cada entrega.</p></div>
+      <div class="card reveal" style="padding:0;overflow:hidden">
+        <div style="aspect-ratio:4/5;overflow:hidden"><img src="assets/img/team-sara.jpg" alt="Sara Chavira" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="padding:22px"><h3 style="font-size:1.1rem">Sara Chavira</h3><div style="color:var(--accent);font-size:.78rem;font-weight:600;text-transform:uppercase;margin:4px 0 9px">Directora Creativa</div>
+          <p style="color:var(--muted);font-size:.88rem">Fotógrafa profesional y creadora de contenido. Define el estilo visual y la narrativa de cada entrega.</p></div>
       </div>
-      <div class="member reveal">
-        <div class="member-ph empty"><span class="ini">FB</span><span class="soon">SDrones</span></div>
-        <div class="member-body"><h3>Felipe Barrios Treviño</h3><div class="member-role">2ª Cámara · Calidad</div>
-          <p>Segunda cámara y supervisor de calidad. Se asegura de que cada toma cumpla el estándar SDrones.</p></div>
+      <div class="card reveal" style="padding:0;overflow:hidden">
+        <div style="aspect-ratio:4/5;overflow:hidden"><img src="assets/img/team-felipe.jpg" alt="Felipe Barrios Treviño" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="padding:22px"><h3 style="font-size:1.1rem">Felipe Barrios Treviño</h3><div style="color:var(--accent);font-size:.78rem;font-weight:600;text-transform:uppercase;margin:4px 0 9px">2ª Cámara · Calidad</div>
+          <p style="color:var(--muted);font-size:.88rem">Segunda cámara y supervisor de calidad. Se asegura de que cada toma cumpla el estándar SDrones.</p></div>
       </div>
-      <div class="member reveal">
-        <div class="member-ph empty"><span class="ini">AM</span><span class="soon">Foto pronto</span></div>
-        <div class="member-body"><h3>Alberto Mendoza</h3><div class="member-role">Editor · Community · 3ª Cámara</div>
-          <p>Editor profesional y community manager. Convierte el material en piezas listas para vender y para redes.</p></div>
+      <div class="card reveal" style="padding:0;overflow:hidden">
+        <div style="aspect-ratio:4/5;overflow:hidden"><img src="assets/img/team-alberto.jpg" alt="Alberto Mendoza" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="padding:22px"><h3 style="font-size:1.1rem">Alberto Mendoza</h3><div style="color:var(--accent);font-size:.78rem;font-weight:600;text-transform:uppercase;margin:4px 0 9px">Editor · Community · 3ª Cámara</div>
+          <p style="color:var(--muted);font-size:.88rem">Editor profesional y community manager. Convierte el material en piezas listas para vender y para redes.</p></div>
       </div>
     </div>
   </div>
@@ -470,7 +250,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2
         <span class="eyebrow"><span class="dot"></span>Agenda tu llamada</span>
         <h2 style="margin-top:14px">Cuéntanos de tu proyecto</h2>
         <p>Responde estas preguntas rápidas y te contactamos por WhatsApp para agendar tu llamada de 15 min. Solo trabajamos con quien va en serio.</p>
-        <form id="leadForm">
+        <form id="leadForm" data-intro="Hola SDRONES, quiero agendar una llamada.">
           <div class="field"><label>¿Eres asesor independiente o inmobiliaria?</label>
             <select name="perfil" required><option value="" disabled selected>Selecciona…</option><option>Asesor independiente</option><option>Inmobiliaria / Agencia</option><option>Constructora / Desarrollador</option><option>Dueño particular</option></select></div>
           <div class="field"><label>¿En qué ciudad trabajas?</label>
@@ -488,9 +268,13 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2
         </form>
       </div>
       <div class="aside-box reveal">
-        <div class="calendly">
-          📅 <b style="color:var(--white)">¿Prefieres reservar directo?</b><br>
-          Elige el horario que te acomode para tu llamada de 30 minutos con SDrones.
+        <h3>Lo que obtienes</h3>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Asesoría directa, sin intermediarios ni vueltas.</div>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Cotización clara en la misma llamada.</div>
+        <div class="chk"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4"/></svg>Material listo para publicar en 48 horas.</div>
+        <div class="calendly-box" style="margin-top:24px">
+          📅 <b style="color:var(--ink)">¿Prefieres reservar directo?</b><br>
+          Elige el horario que te acomode para tu llamada con SDrones.
           <br><br><a href="#" class="btn btn-primary" style="margin-top:6px" id="calBtn">📅 Elegir horario</a>
         </div>
       </div>
@@ -507,23 +291,25 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2
     <a href="#agenda" class="btn btn-primary reveal">Agenda tu llamada →</a>
   </div>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="foot">
       <div class="foot-brand">
-        <a href="#" class="brand"><img src="assets/img/logo-nombre.png" alt="SDRONES" class="brand-logo"></a>
+        <a href="index.html" class="brand"><img src="assets/img/logo-nombre.png" alt="SDRONES" class="brand-logo"></a>
         <p>Grabación profesional con dron para inmobiliarias, constructoras y desarrolladores. Hacemos que tus propiedades se vendan más rápido.</p>
       </div>
       <div class="foot-col">
         <h4>Servicios</h4>
         <a href="#servicios">Video inmobiliario</a><a href="#servicios">Avance de obra</a>
-        <a href="#servicios">Fotografía aérea</a><a href="#servicios">Reels para redes</a>
+        <a href="#servicios">Fotografía aérea</a><a href="eventos.html">Cobertura de eventos</a>
       </div>
       <div class="foot-col">
         <h4>Empresa</h4>
-        <a href="#portafolio">Portafolio</a><a href="#precios">Precios</a><a href="#agenda">Agendar</a>
+        <a href="#portafolio">Portafolio</a><a href="#precios">Precios</a>
+        <a href="eventos.html">Eventos</a><a href="#agenda">Agendar</a>
       </div>
       <div class="foot-col">
         <h4>Contacto</h4>
@@ -547,71 +333,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2
   <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.6.2-.2.3-.7 1-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.7-3.3-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.8.8-1 1.9-.6 3.2.5 1.6 1.6 3 3.1 4.1 2.1 1.6 3.7 1.9 4.5 1.7.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.2-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
 </a>
 
-<script>
-// header scroll
-const hdr=document.getElementById('hdr');
-addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>30));
-// menu movil
-const mm=document.getElementById('mmenu');
-document.getElementById('burger').onclick=()=>mm.classList.add('open');
-document.getElementById('mclose').onclick=()=>mm.classList.remove('open');
-mm.querySelectorAll('a').forEach(a=>a.onclick=()=>mm.classList.remove('open'));
-// reveal
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-// form -> whatsapp con las respuestas (el "bot" cero-código)
-const WA='5215578889720';   /* <-- WhatsApp del AGENTE de ManyChat. Cámbialo por el número que conectaste a ManyChat. */
-document.getElementById('leadForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const f=new FormData(e.target);
-  const msg='Hola SDRONES, quiero agendar una llamada.\n\n'+
-    'Perfil: '+f.get('perfil')+'\n'+
-    'Ciudad: '+f.get('ciudad')+'\n'+
-    'Inmueble: '+f.get('inmueble')+'\n'+
-    'Publico al mes: '+f.get('volumen')+'\n'+
-    'Lo necesito: '+f.get('cuando');
-  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');   // encodeURIComponent = sin signos rotos
-});
-document.getElementById('calBtn').onclick=(e)=>{e.preventDefault();Calendly.initPopupWidget({url:'https://calendly.com/santibamedw2/30min'});};
-// ===== cursor personalizado con brillo =====
-const cur=document.getElementById('cur');
-let mx=innerWidth/2,my=innerHeight/2,cxp=mx,cyp=my;
-const fine=matchMedia('(pointer:fine)').matches;
-addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-if(fine){(function ring(){cxp+=(mx-cxp)*.2;cyp+=(my-cyp)*.2;cur.style.transform=`translate(${cxp}px,${cyp}px) translate(-50%,-50%)`;requestAnimationFrame(ring)})();
-  document.querySelectorAll('a,button,select,input,.gallery a,.card,.member,.price,.step').forEach(el=>{
-    el.addEventListener('mouseenter',()=>cur.classList.add('grow'));
-    el.addEventListener('mouseleave',()=>cur.classList.remove('grow'));});
-  addEventListener('mousedown',e=>{cur.classList.add('click');const r=document.createElement('div');r.className='click-ring';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';document.body.appendChild(r);setTimeout(()=>r.remove(),620)});
-  addEventListener('mouseup',()=>cur.classList.remove('click'));
-}
-// ===== logos S flotantes en colores =====
-const flC=document.getElementById('floaters'),cols=['cy','wh','sl'],FL=[];
-for(let i=0;i<8;i++){const d=document.createElement('div');d.className='floater '+cols[i%3];
-  const s=54+Math.random()*120;d.style.width=s+'px';d.style.height=(s*1.32)+'px';
-  FL.push({el:d,w:s,h:s*1.32,bx:0,by:0,sp:.1+Math.random()*.25,ph:Math.random()*6.3,amp:14+Math.random()*20,base:.05+Math.random()*.05});
-  flC.appendChild(d);}
-function colocarFL(){for(const o of FL){o.bx=o.amp+Math.random()*Math.max(1,innerWidth-o.w-o.amp*2);o.by=o.amp+Math.random()*Math.max(1,innerHeight-o.h-o.amp*2);}}
-colocarFL();addEventListener('resize',colocarFL);
-// ===== partículas dinámicas con reacción al mouse =====
-const cv=document.getElementById('stars'),cx=cv.getContext('2d');let W,H,ps;
-function rz(){W=cv.width=innerWidth;H=cv.height=innerHeight;ps=Array.from({length:Math.min(95,innerWidth/15)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.7+.3}))}
-rz();addEventListener('resize',rz);
-let t=0;
-(function loop(){t+=.016;cx.clearRect(0,0,W,H);
-  for(const p of ps){const dx=p.x-mx,dy=p.y-my,d2=dx*dx+dy*dy;
-    if(d2<20000){const inv=1/Math.sqrt(d2+1),f=(20000-d2)/20000*.7;p.vx+=dx*inv*f;p.vy+=dy*inv*f}
-    p.vx*=.95;p.vy*=.95;p.x+=p.vx+Math.sin(t+p.y*.01)*.18;p.y+=p.vy-.16;
-    if(p.y<0)p.y=H;if(p.y>H)p.y=0;if(p.x<0)p.x=W;if(p.x>W)p.x=0;
-    cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle='rgba(52,227,240,'+Math.min(.85,p.r/2)+')';cx.fill()}
-  for(const o of FL){
-    let fx=o.bx+Math.sin(t*o.sp+o.ph)*o.amp, fy=o.by+Math.cos(t*o.sp*.8+o.ph)*o.amp;
-    fx=Math.max(4,Math.min(W-o.w-4,fx)); fy=Math.max(4,Math.min(H-o.h-4,fy));
-    const dist=Math.hypot(fx+o.w/2-mx,fy+o.h/2-my),near=dist<200,sc=near?1+(200-dist)/200*.3:1;
-    o.el.style.transform=`translate(${fx}px,${fy}px) scale(${sc}) rotate(${Math.sin(t*.3+o.ph)*6}deg)`;
-    o.el.style.opacity=near?Math.min(.3,o.base+(200-dist)/200*.24):o.base;
-    o.el.style.filter=near?'drop-shadow(0 0 20px #34e3f0)':'none'}
-  requestAnimationFrame(loop)})();
-</script>
+<script src="assets/js/fx.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
